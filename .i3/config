@@ -113,7 +113,9 @@ bindsym $mod+Shift+P restart
 bindsym $mod+Shift+greater exit
 
 # Take a screenshot
-bindsym Print exec scrot -s ~/ss.png
+bindsym Print exec gnome-screenshot -w
+bindsym Control+Print exec gnome-screenshot -a
+bindsym $mod+Print exec gnome-screenshot
 
 new_window pixel 1
 
@@ -173,8 +175,8 @@ bar {
         status_command i3status
         colors {
                 background         #070c11
-                focused_workspace  #1968b1 #1968b1 #ffffff
-                inactive_workspace #070c11 #070c11 #ffffff
+                focused_workspace  #1968b1 #1968b1 #fafafa
+                inactive_workspace #070c11 #070c11 #fafafa
                 active_workspace   #070c11 #070c11 #1968b1
         }
 }

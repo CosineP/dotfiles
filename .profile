@@ -22,4 +22,5 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 export PATH="$PATH:/opt/firefox:/opt/tor-browser_en-US:/opt/android-studio/bin"
-export DMENU_CUSTOM_OPTIONS="-fn "-*-helvetica-medium-r-*-*-14-*-*-*-*-*-*-*" -nb "#000" -nf "#d00" -sb "#d00" -sf "#000""
+export DMENU_CUSTOM_OPTIONS="-fn "-*-helvetica-medium-r-*-*-14-*-*-*-*-*-*-*" -nb "#222222" -nf "#bbbbbb" -sb "#005577" -sf "#eeeeee""
+export XDG_CONFIG_HOME=$HOME/.config

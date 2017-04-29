@@ -1,0 +1,230 @@
+Commandline: apt-get -o APT::Status-Fd=4 -o APT::Keep-Fds::=5 -o APT::Keep-Fds::=6 -q -y --no-remove install locales
+Commandline: apt-get -o APT::Status-Fd=4 -o APT::Keep-Fds::=5 -o APT::Keep-Fds::=6 -q -y --no-remove install acpi
+Commandline: apt-get -o APT::Status-Fd=4 -o APT::Keep-Fds::=5 -o APT::Keep-Fds::=6 -q -y --no-remove install acpid
+Commandline: apt-get -o APT::Status-Fd=4 -o APT::Keep-Fds::=5 -o APT::Keep-Fds::=6 -q -y --no-remove install acpi-support-base
+Commandline: apt-get -o APT::Status-Fd=4 -o APT::Keep-Fds::=5 -o APT::Keep-Fds::=6 -q -y --no-remove install grub-common
+Commandline: apt-get -o APT::Status-Fd=4 -o APT::Keep-Fds::=5 -o APT::Keep-Fds::=6 -q -y --no-remove install grub-pc
+Commandline: apt-get --yes purge live-boot
+Commandline: apt-get --yes purge live-boot-initramfs-tools
+Commandline: apt-get --yes purge live-config
+Commandline: apt-get --yes purge live-config-sysvinit
+Commandline: apt-get --yes purge debian-installer-launcher
+Commandline: apt-get --yes autoremove
+Commandline: apt-get install vim
+Commandline: apt-get install i3
+Commandline: apt-get install python-dev
+Commandline: apt-get install python-pip
+Commandline: apt-get install git
+Commandline: apt-get remove iceweasel
+Commandline: apt-get install curl
+Commandline: apt-get install apt-transport-https
+Commandline: apt-get install google-cloud-sdk
+Commandline: apt-get install google-cloud-sdk-app-engine-python
+Commandline: apt-get install google-cloud-sdk-datastore-emulator
+Commandline: apt-get install python-scipy
+Commandline: apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
+Commandline: apt-get install libav-tools
+Commandline: apt-get install gnome-color-chooser
+Commandline: apt-get install arc-theme
+Commandline: apt-get remove arc-theme
+Commandline: apt-get install tesseract-ocr
+Commandline: apt-get install linux-headers-amd64
+Commandline: apt-get install libopenblas-dev liblapack-dev gfortran python-numpy python-scipy
+Commandline: apt-get install xclip
+Commandline: apt-get install cups
+Commandline: apt-get install cython
+Commandline: apt-get install php5
+Commandline: apt-get install curl libcurl3 php5-curl
+Commandline: apt-get install php5-mcrypt
+Commandline: apt-get install haskell-platform
+Commandline: apt-get install openssh-server
+Commandline: apt-get install scrot
+Commandline: apt-get install lynx
+Commandline: apt-get install vim-gtk
+Commandline: apt-get install python-pygame
+Commandline: apt-get install ack
+Commandline: apt-get remove ack
+Commandline: apt-get install ack-grep
+Commandline: apt-get install tree
+Commandline: apt-get install feh
+Commandline: apt-get install libglfw3
+Commandline: apt-get install libglfw3-dev
+Commandline: apt-get upgrade
+Commandline: apt-get install awesome
+Commandline: apt-get install xmonad
+Commandline: apt-get install nitrogen
+Commandline: apt-get remove feh
+Commandline: apt-get install popularity-contest
+Commandline: apt-get autoremove
+Commandline: apt-get install xbomb
+Commandline: apt-get install numlockx
+Commandline: apt-get install autoconf
+Commandline: apt-get install libglib2.0-dev
+Commandline: apt-get install gtk-doc-tools
+Commandline: apt-get install valac
+Commandline: apt-get install libgirepository1.0-dev
+Commandline: apt-get install gperf
+Commandline: apt-get install libgtk-3-dev
+Commandline: apt-get install libxml2-utils
+Commandline: apt-get install termit
+Commandline: apt-get remove termit
+Commandline: apt-get install g++ libgtk-3-dev gtk-doc-tools gnutls-bin valac
+Commandline: apt-get autoremove
+Commandline: apt-get remove gnutls-bin
+Commandline: apt-get remove libxml2-utils
+Commandline: apt-get remove libgtk-3-dev
+Commandline: apt-get remove valac
+Commandline: apt-get remove gtk-doc-tools
+Commandline: apt-get autoremove
+Commandline: apt-get install intltool
+Commandline: apt-get install redshift
+Commandline: apt-get install apache2
+Commandline: apt-get install apache2-prefork-dev
+Commandline: apt-get install libapache2-mod-python
+Commandline: apt-get install libapache2-mod-wsgi
+Commandline: apt-get install ruby
+Commandline: apt-get install ruby-switch
+Commandline: apt-get install ruby-dev
+Commandline: apt-get install wine
+Commandline: apt-get remove wine64-bin
+Commandline: apt-get upgrade
+Commandline: apt-get install gdb
+Commandline: apt-get install blender
+Commandline: apt-get install tightvncserver
+Commandline: apt-get remove tightvncserver
+Commandline: apt-get install tightvncserver
+Commandline: apt-get install x11vnc
+Commandline: apt-get build-dep iceweasel
+Commandline: apt-get install mercurial
+Commandline: apt-get install gcc
+Commandline: apt-get remove debhelper
+Commandline: apt-get remove libstartup-notification0-dev
+Commandline: apt-get remove libgnomeui-dev
+Commandline: apt-get remove libreadline-dev
+Commandline: apt-get remove libhunspell-dev
+Commandline: apt-get remove libdbus-glib-1-dev
+Commandline: apt-get remove libiw-dev
+Commandline: apt-get remove libnotify-dev
+Commandline: apt-get remove libevent-dev
+Commandline: apt-get remove libpulse-dev
+Commandline: apt-get remove libgnome2-dev
+Commandline: apt-get remove libgnomevfs2-dev
+Commandline: apt-get autoremove
+Commandline: apt-get -f install
+Commandline: apt-get install libglew-dev
+Commandline: apt-get install deluge
+Commandline: apt-get install tor
+Commandline: apt-get remove deluge
+Commandline: apt-get autoremove
+Commandline: apt-get install vlc -t=ucclia
+Commandline: apt-get install spell
+Commandline: apt-get install flex
+Commandline: apt-get install i2p i2p-keyring
+Commandline: apt-get install python3
+Commandline: apt-get install palemoon
+Commandline: apt-get remove palemoon
+Commandline: apt-get install -t=ucclia openbox
+Commandline: apt-get remove openbox
+Commandline: apt-get remove python3.4
+Commandline: apt-get remove python3.4-minimal
+Commandline: apt-get autoremove
+Commandline: apt-get install python3
+Commandline: apt-get install -t=ucclia xfce4
+Commandline: apt-get remove xfce4
+Commandline: apt-get autoremove
+Commandline: apt-get install python-requests
+Commandline: apt-get install -f
+Commandline: apt-get install -f
+Commandline: apt-get install lxappearance
+Commandline: apt-get -t=ucclia install grub2-splashimages
+Commandline: apt-get install flam3
+Commandline: apt-get remove flam3
+Commandline: apt-get install python3 -t=jessie
+Commandline: apt-get install kvm -t=ucclia
+Commandline: apt-get install gparted
+Commandline: apt-get install parted
+Commandline: apt-get remove gparted
+Commandline: apt-get install gdisk
+Commandline: apt-get install pmount
+Commandline: apt-get install gparted
+Commandline: apt-get purge palemoon
+Commandline: apt-get purge openjdk-6-jre-headless
+Commandline: apt-get install python3-pip
+Commandline: apt-get install fish
+Commandline: apt-get install at
+Commandline: apt-get upgrade
+Commandline: apt-get install ibus-mozc -t=ucclia
+Commandline: apt-get install anki
+Commandline: apt-get install im-switch
+Commandline: apt-get install --only-upgrade anki -t=jessie
+Commandline: apt-get install xcb
+Commandline: apt-get install xcb libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev
+Commandline: apt-get install tmux
+Commandline: apt-get install surf
+Commandline: apt-get install -f
+Commandline: apt-get install screenfetch
+Commandline: apt-get install pavucontrol
+Commandline: apt-get install vncviewer
+Commandline: apt-get install conky
+Commandline: apt-get install python-pywapi
+Commandline: apt-get install lua5.2 -t=ucclia
+Commandline: apt-get install conky-all
+Commandline: apt-get remove conky
+Commandline: apt-get remove lua5.2
+Commandline: apt-get install npm -t=ucclia
+Commandline: apt-get install nodejs-legacy
+Commandline: apt-get install fonts-powerline
+Commandline: apt-get install powerline
+Commandline: apt-get remove powerline
+Commandline: apt-get install compton
+Commandline: apt-get install autoconf-archive
+Commandline: apt-get install pkg-config -t=jessie
+Commandline: apt-get install autoconf -t=jessie
+Commandline: apt-get install arc-theme
+Commandline: apt-get install libxcb-xvmc0
+Commandline: apt-get install yajl-tools
+Commandline: apt-get install libyajl-dev
+Commandline: apt-get install libstartup-notification0-dev
+Commandline: apt-get install libev-dev
+Commandline: apt-get install libxkbcommon-dev
+Commandline: apt-get install libxkbcommon-x11-dev
+Commandline: apt-get install libxcb-cursor-dev
+Commandline: apt-get install automake -t=jessie
+Commandline: apt-get install xutils-dev
+Commandline: apt-get install lib32stdc++6 -t=jessie
+Commandline: apt-get install bazel
+Commandline: apt-get install herbstluftwm
+Commandline: apt-get install streamer
+Commandline: apt-get install motion
+Commandline: apt-get install mencoder
+Commandline: apt-get --only-upgrade install awesome -t=jessie
+Commandline: apt-get remove awesome
+Commandline: apt-get install awesome -t=jessie
+Commandline: apt-get remove awesome
+Commandline: apt-get install awesome
+Commandline: apt-get install awesome -t=jessie
+Commandline: apt-get remove awesome
+Commandline: apt-get install awesome
+Commandline: apt-get install dwm
+Commandline: apt-get install libavbin-dev
+Commandline: apt-get install python3-pip -t=jessie
+Commandline: apt-get purge python3-pip
+Commandline: apt-get install python3-pip
+Commandline: apt-get install libpython3.4-dev
+Commandline: apt-get install hello
+Commandline: apt-get purge streamer
+Commandline: apt-get purge motion
+Commandline: apt-get install tint2
+Commandline: apt-get install cmake
+Commandline: apt-get install libxdg-basedir-dev
+Commandline: apt-get install libxcb-shape0-dev
+Commandline: apt-get install lua5.2
+Commandline: apt-get install liblua5.2-dev
+Commandline: apt-get install lua5.1
+Commandline: apt-get purge lua5.2
+Commandline: apt-get purge lua5.2-dev
+Commandline: apt-get purge liblua5.2
+Commandline: apt-get install liblua5.1-dev
+Commandline: apt-get install luarocks
+Commandline: apt-get remove awesome
+Commandline: apt-get install awesome
