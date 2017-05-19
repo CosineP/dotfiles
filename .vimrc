@@ -4,6 +4,7 @@ execute pathogen#infect()
 " Airline
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 "let g:airline_powerline_fonts = 1
 set ttimeoutlen=10
 
@@ -13,7 +14,8 @@ color dracula
 
 " General neccessities
 filetype plugin indent on
-set number
+let mapleader = " "
+set relativenumber
 " Tabs
 set tabstop=4
 set softtabstop=0 noexpandtab
@@ -26,4 +28,3 @@ set hlsearch
 set encoding=utf-8
 set splitbelow
 set splitright
-

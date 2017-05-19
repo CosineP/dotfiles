@@ -168,48 +168,41 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
-wibar = true
-if wibar then
+for s = 1, screen.count() do
+    -- Create a promptbox for each screen
+    mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
+    -- We need one layoutbox per screen.
+    mylayoutbox[s] = awful.widget.layoutbox(s)
+    mylayoutbox[s]:buttons(awful.util.table.join(
+                           awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+                           awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+                           awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
+                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+    -- Create a taglist widget
+    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, mytaglist.buttons)
 
-	for s = 1, screen.count() do
-		-- Create a promptbox for each screen
-		mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
-		-- Create an imagebox widget which will contains an icon indicating which layout we're using.
-		-- We need one layoutbox per screen.
-		mylayoutbox[s] = awful.widget.layoutbox(s)
-		mylayoutbox[s]:buttons(awful.util.table.join(
-							   awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-							   awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-							   awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-							   awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
-		-- Create a taglist widget
-		mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, mytaglist.buttons)
+    -- Create a tasklist widget
+    mytasklist[s] = awful.widget.tasklist(function(c)
+                                              return awful.widget.tasklist.label.currenttags(c, s)
+                                          end, mytasklist.buttons)
 
-		-- Create a tasklist widget
-		mytasklist[s] = awful.widget.tasklist(function(c)
-												  return awful.widget.tasklist.label.currenttags(c, s)
-											  end, mytasklist.buttons)
-
-		-- Create the wibox
-		mywibox[s] = awful.wibox({
-			position = "bottom",
-			screen = s,
-		})
-		-- Add widgets to the wibox - order matters
-		mywibox[s].widgets = {
-			{
-				mylauncher,
-				mytaglist[s],
-				mypromptbox[s],
-				layout = awful.widget.layout.horizontal.leftright
-			},
-			mylayoutbox[s],
-			mytextclock,
-			s == 1 and mysystray or nil,
-			mytasklist[s],
-			layout = awful.widget.layout.horizontal.rightleft
-		}
-	end
+    -- Create the wibox
+    mywibox[s] = awful.wibox({ position = "bottom", screen = s })
+    -- Add widgets to the wibox - order matters
+    mywibox[s].widgets = {
+        {
+            mylauncher,
+            mytaglist[s],
+            mypromptbox[s],
+            layout = awful.widget.layout.horizontal.leftright
+        },
+        mylayoutbox[s],
+        mytextclock,
+        s == 1 and mysystray or nil,
+        mytasklist[s],
+        layout = awful.widget.layout.horizontal.rightleft
+    }
 end
 -- }}}
 
@@ -226,6 +219,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+	awful.key({ modkey,           }, "e",      function () awful.util.spawn("/home/luna/src/dmenu-custom/dmenu-custom") end),
 
     awful.key({ modkey,           }, "j",
         function ()
@@ -254,22 +248,12 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return",
-		function ()
-			awful.util.spawn(terminal)
-			--awful.client.swap.byidx( 1)
-		end),
-    awful.key({ modkey,           }, "e", function () awful.util.spawn("/home/luna/src/dmenu-custom/dmenu-custom") end),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
-    awful.key({ modkey,           }, "l",     function () 
-		awful.client.focus.global_bydirection("right")
-	end),
-    awful.key({ modkey,           }, "h",     function () 
-	end),
-    awful.key({ modkey, "Disabled Temporarily"          }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,  "Disabled Temporarily"                   }, "h",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
@@ -303,10 +287,6 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "Return",
-		function (c)
-			--client.swap.byidx(-1, c)
-		end),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
@@ -377,7 +357,8 @@ awful.rules.rules = {
                      focus = true,
                      keys = clientkeys,
                      buttons = clientbuttons,
-                     size_hints_honor = false } },
+                     size_hints_honor = false
+                   } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },

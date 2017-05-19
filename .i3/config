@@ -121,14 +121,11 @@ new_window pixel 1
 
 hide_edge_borders both
 
-gaps inner 15
-smart_gaps on
+# gaps inner 15
+# smart_gaps on
 
-exec nitrogen --restore
-
-exec redshift
-
-exec compton
+# LightDM doesn't source this :(
+exec sh /home/luna/.xprofile
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -165,7 +162,7 @@ client.focused          #4c7899 #285577 #fafafa #2e9ef4 #4d80af
 client.focused_inactive #333333 #5f676a #fafafa #484e50 #335473
 client.unfocused        #333333 #222222 #888888 #292d2e #172634
 client.urgent           #2f343a #900000 #fafafa #900000 #900000
-client.placeholder      #000000 #172634 #fafafa #000000 #172634
+#client.placeholder      #000000 #172634 #fafafa #000000 #172634
 
 client.background       #172634
 
