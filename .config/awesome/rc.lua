@@ -11,7 +11,6 @@ require("naughty")
 require("debian.menu")
 
 -- Custom
-local lain = require("lain")
 
 --lain.util.useless_gaps_resize(20);
 
@@ -40,23 +39,11 @@ do
 end
 -- }}}
 
--- {{{ Autorun
-autorun = true
-autorunApps =
-{
-    "compton -b",
-	"redshift &"
-}
-if autorun then
-    for app = 1, #autorunApps do
-        awful.util.spawn(autorunApps[app])
-    end
-end
---- }}}
-
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/luna/.config/awesome/theme.lua")
+
+awful.util.spawn_with_shell("~/.xprofile")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -118,7 +105,7 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" })
+mytextclock = awful.widget.textclock({ align = "right" }, "   %F %l:%M%P   ")
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
