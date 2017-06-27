@@ -14,5 +14,5 @@ xmodmap /home/luna/.Xmodmap
 run redshift &
 run compton -b
 run xcape 
-# run nitrogen --restore
+nitrogen --restore
 
