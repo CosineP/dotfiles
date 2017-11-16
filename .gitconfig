@@ -1,3 +1,5 @@
 [user]
 	name = Luna
 	email = judahiii@gmail.com
+[credential]
+	helper = cache
