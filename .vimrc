@@ -12,6 +12,10 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'brooth/far.vim' " Need?
 Plug 'scrooloose/nerdtree'
 Plug 'jlfwong/vim-mercenary'
+Plug 'leafgarland/typescript-vim'
+Plug 'quabug/vim-gdscript'
+Plug 'djoshea/vim-autoread'
+Plug 'severin-lemaignan/vim-minimap'
 
 call plug#end()
 
