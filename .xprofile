@@ -15,4 +15,5 @@ run redshift &
 run compton -b
 run xcape 
 nitrogen --restore
+~/src/mycroft-core/start-mycroft.sh all
 
