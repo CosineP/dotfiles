@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH=/home/luna/.oh-my-zsh
 
@@ -67,6 +64,8 @@ antigen apply
 
 # User configuration
 
+eval $(thefuck --alias)
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -106,7 +105,6 @@ alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi="nvim"
 alias doot="echo thanks mr skeltal"
-alias fuck="echo everything\'s gonna be alright"
 alias aoeu="echo what is the problem you are trying to solve"
 alias aoeuhtns=aoeu
 # For my dotfiles git
@@ -123,6 +121,9 @@ function cs() {
 function mcd() {
     mkdir $1 && cd $1
 }
+function mark() {
+    markdown $1 > /tmp/md && firefox /tmp/md
+}
 
 # Env variables
 export EDITOR="nvim"
@@ -130,7 +131,4 @@ export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib:/usr/lib64:$LD_LIBRARY_PATH:/usr/lo
 export TP_GAE="tpassing-175603"
 export TP_GAE_SQL="tpassing-175603:us-central1:transpassing"
 export TPASSING="ec2-13-58-183-86.us-east-2.compute.amazonaws.com"
-
-# Setup environment things
-bash ~/.cargo/env
 
