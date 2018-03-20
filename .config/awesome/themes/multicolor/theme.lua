@@ -1,17 +1,17 @@
-
 --[[
-                                     
-     Multicolor Awesome WM theme 2.0 
-     github.com/copycat-killer       
-                                     
---]]
 
+     Multicolor Awesome WM theme 2.0
+     github.com/lcpz
+
+--]]
 
 local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
-local os    = { getenv = os.getenv, setlocale = os.setlocale }
+
+local os = { getenv = os.getenv, setlocale = os.setlocale }
+local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
@@ -43,7 +43,6 @@ theme.widget_cpu                                = theme.confdir .. "/icons/cpu.p
 theme.widget_weather                            = theme.confdir .. "/icons/dish.png"
 theme.widget_fs                                 = theme.confdir .. "/icons/fs.png"
 theme.widget_mem                                = theme.confdir .. "/icons/mem.png"
-theme.widget_fs                                 = theme.confdir .. "/icons/fs.png"
 theme.widget_note                               = theme.confdir .. "/icons/note.png"
 theme.widget_note_on                            = theme.confdir .. "/icons/note_on.png"
 theme.widget_netdown                            = theme.confdir .. "/icons/net_down.png"
@@ -127,10 +126,9 @@ theme.weather = lain.widget.weather({
 -- / fs
 local fsicon = wibox.widget.imagebox(theme.widget_fs)
 theme.fs = lain.widget.fs({
-    options = "--exclude-type=tmpfs",
     notification_preset = { font = "DejaVu Sans Mono 10", fg = theme.fg_normal },
     settings  = function()
-        widget:set_markup(markup.fontfg(theme.font, "#80d9d8", fs_now.used .. "% "))
+        widget:set_markup(markup.fontfg(theme.font, "#80d9d8", fs_now["/"].percentage .. "% "))
     end
 })
 
@@ -271,7 +269,7 @@ function theme.at_screen_connect(s)
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(awful.util.table.join(
+    s.mylayoutbox:buttons(my_table.join(
                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
