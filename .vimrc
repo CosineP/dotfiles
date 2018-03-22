@@ -1,6 +1,3 @@
-" Pathogen (Phasing out)
-execute pathogen#infect()
-
 " plug-vim (New, adding to here from now on)
 call plug#begin()
 
