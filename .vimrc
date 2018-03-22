@@ -16,6 +16,21 @@ Plug 'leafgarland/typescript-vim'
 Plug 'quabug/vim-gdscript'
 Plug 'djoshea/vim-autoread'
 Plug 'severin-lemaignan/vim-minimap'
+" Imported from .bundle
+Plug 'dracula/vim'
+Plug 'mileszs/ack.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'godlygeek/tabular'
+Plug 'majutsushi/tagbar'
+Plug 'tomtom/tcomment_vim'
+Plug 'vim-airline/vim-airline'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-five'
+Plug 'lepture/vim-jinja'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -67,3 +82,4 @@ set hlsearch
 set encoding=utf-8
 set splitbelow
 set splitright
+set mouse=a
