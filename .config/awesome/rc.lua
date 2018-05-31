@@ -412,9 +412,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "v", function () awful.spawn("xsel -b | xsel") end),
 
     -- User programs
-    awful.key({ modkey }, "e", function () awful.spawn("/home/luna/src/dmenu-custom/dmenu-custom") end,
+    awful.key({ modkey }, "e", function () awful.spawn.with_shell("/home/luna/src/dmenu-custom/dmenu-custom") end,
         {description = "dmenu (run)", group = "launcher"}),
-    awful.key({ modkey }, "d", function () awful.spawn("/home/luna/src/dmenu-custom/dmenu-recent-remove") end),
+    awful.key({ modkey }, "d", function () awful.spawn.with_shell("/home/luna/src/dmenu-custom/dmenu-recent-remove") end),
     awful.key({ modkey }, "q", function () awful.spawn(browser) end),
 
     -- Default
