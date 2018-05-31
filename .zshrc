@@ -131,6 +131,17 @@ function mcd() {
 function mark() {
     markdown $1 > /tmp/md && firefox /tmp/md
 }
+function swp()
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+function cb
+{
+    cat "$@" | xclip -sel clip
+}
 
 # Env variables
 export EDITOR="nvim"
