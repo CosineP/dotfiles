@@ -64,7 +64,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " General neccessities
 let mapleader = " "
-set relativenumber
+set number relativenumber
 set hidden
 " Tabs
 set tabstop=4
