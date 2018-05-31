@@ -72,6 +72,7 @@ set softtabstop=0 noexpandtab
 set shiftwidth=4
 autocmd Filetype sh            setlocal sts=2 sw=2 et
 autocmd Filetype html          setlocal tw=80 spell spelllang=en_us
+autocmd Filetype markdown      setlocal tw=80 spell spelllang=en_us
 autocmd BufRead  /tmp/jn       setlocal tw=80 spell spelllang=en_us
 autocmd BufRead  ~/journal.txt setlocal tw=80 spell spelllang=en_us
 " Other
