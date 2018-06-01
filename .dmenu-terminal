@@ -1,4 +1,5 @@
 vim 0
+wicd-client 1
 firefox 1
 chromium 1
 brackets 1
@@ -12,4 +13,6 @@ ardour5 1
 openshot 1
 godot 1
 firestorm 1
+scudcloud 1
+android-studio 1
 
