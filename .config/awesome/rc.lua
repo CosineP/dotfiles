@@ -20,7 +20,10 @@ local lain          = require("lain")
 --local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+local volume_control= require("volume-control")
 -- }}}
+
+volumecfg = volume_control({})
 
 -- {{{ Error handling
 if awesome.startup_errors then
@@ -211,6 +214,10 @@ globalkeys = awful.util.table.join(
     --           {description = "view  previous nonempty", group = "tag"}),
     -- awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
     --           {description = "view  previous nonempty", group = "tag"}),
+
+    awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
+    awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
+    awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
 
     -- Default client focus
     awful.key({ altkey,           }, "j",
