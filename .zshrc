@@ -122,7 +122,7 @@ function mcd() {
     mkdir $1 && cd $1
 }
 function mark() {
-    markdown $1 > /tmp/md && firefox /tmp/md
+    markdown $1 > /tmp/md.html && firefox /tmp/md.html
 }
 
 # Env variables
