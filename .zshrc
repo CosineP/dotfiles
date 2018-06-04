@@ -47,7 +47,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git zsh-autosuggestions)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # Antigen
 source /usr/share/zsh-antigen/antigen.zsh
@@ -55,12 +55,18 @@ source /usr/share/zsh-antigen/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundle git
+antigen bundle common-aliases
+antigen bundle debian
+antigen bundle pip
+antigen bundle python
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen theme avit
 
 antigen apply
+
+autoload zmv
 
 # User configuration
 
@@ -101,8 +107,8 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-alias zshconfig="mate ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="vi ~/.zshrc"
+alias ohmyzsh="vi ~/.oh-my-zsh"
 alias vi="nvim"
 alias doot="echo thanks mr skeltal"
 alias aoeu="echo what is the problem you are trying to solve"
@@ -114,6 +120,7 @@ alias poweroff /sbin/poweroff
 alias reboot /sbin/reboot
 # Shortcuts
 alias x=exit
+alias vimrc="vi ~/.vimrc"
 # Function aliases
 function cs() {
     cd $1 && ls
@@ -123,6 +130,17 @@ function mcd() {
 }
 function mark() {
     markdown $1 > /tmp/md.html && firefox /tmp/md.html
+}
+function swp()
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+function cb
+{
+    cat "$@" | xclip -sel clip
 }
 
 # Env variables
