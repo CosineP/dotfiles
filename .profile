@@ -21,8 +21,9 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-export PATH="$PATH:/opt/firefox:/opt/tor-browser_en-US:/opt/android-studio/bin"
+export PATH="$PATH:/opt/firefox:/opt/tor-browser_en-US:/opt/android-studio/bin:/opt/godot"
 export DMENU_CUSTOM_OPTIONS="-fn "-*-helvetica-medium-r-*-*-14-*-*-*-*-*-*-*" -nb "#222222" -nf "#bbbbbb" -sb "#005577" -sf "#eeeeee""
 export XDG_CONFIG_HOME=$HOME/.config
 
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH:/opt/godot"
+

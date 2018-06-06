@@ -1,5 +1,9 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH:/opt/godot:/opt/anki/bin:/opt/firestorm-install
+export PATH=$PATH:$HOME/bin:/usr/local/bin:/opt
+export PATH=$PATH:/opt/spring/bin:/opt/flutter/bin
+export PATH=$PATH:$HOME/src/fabric/fabric-samples/bin
+export PATH=$PATH:/opt/godot
+export PATH=$PATH:/opt/anki/bin
+export PATH=$PATH:/opt/firestorm-install
 
-# Setup environment things
-source ~/.cargo/env
+export ANDROID_HOME=~/.android/Sdk
+

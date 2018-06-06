@@ -22,12 +22,16 @@ Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 Plug 'vim-airline/vim-airline'
 Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-five'
+Plug 'tpope/vim-fugitive'
 Plug 'lepture/vim-jinja'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
+Plug 'tomlion/vim-solidity'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'nikvdp/ejs-syntax'
+Plug 'andreshazard/vim-freemarker'
 
 call plug#end()
 
@@ -64,7 +68,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " General neccessities
 let mapleader = " "
-set relativenumber
+set number relativenumber
 set hidden
 " Tabs
 set tabstop=4
@@ -72,6 +76,7 @@ set softtabstop=0 noexpandtab
 set shiftwidth=4
 autocmd Filetype sh            setlocal sts=2 sw=2 et
 autocmd Filetype html          setlocal tw=80 spell spelllang=en_us
+autocmd Filetype markdown      setlocal tw=80 spell spelllang=en_us
 autocmd BufRead  /tmp/jn       setlocal tw=80 spell spelllang=en_us
 autocmd BufRead  ~/journal.txt setlocal tw=80 spell spelllang=en_us
 " Other
