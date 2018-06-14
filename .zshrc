@@ -150,3 +150,7 @@ export TP_GAE="tpassing-175603"
 export TP_GAE_SQL="tpassing-175603:us-central1:transpassing"
 export TPASSING="ec2-13-58-183-86.us-east-2.compute.amazonaws.com"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
