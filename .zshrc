@@ -121,6 +121,8 @@ alias reboot /sbin/reboot
 # Shortcuts
 alias x=exit
 alias vimrc="vi ~/.vimrc"
+alias mocha="./node_modules/mocha/bin/mocha"
+alias gat="cb ~/github-access-token"
 # Function aliases
 function cs() {
     cd $1 && ls

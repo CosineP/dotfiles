@@ -7,4 +7,5 @@ export PATH=$PATH:/opt/anki/bin
 export PATH=$PATH:/opt/firestorm-install
 
 export ANDROID_HOME=~/.android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools
 
