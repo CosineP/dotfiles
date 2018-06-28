@@ -30,8 +30,9 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tomlion/vim-solidity'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'nikvdp/ejs-syntax'
 Plug 'andreshazard/vim-freemarker'
+Plug 'briancollins/vim-jst'
+Plug 'pangloss/vim-javascript'
 
 call plug#end()
 
@@ -70,10 +71,11 @@ nmap <F8> :TagbarToggle<CR>
 let mapleader = " "
 set number relativenumber
 set hidden
-" Tabs
-set tabstop=4
-set softtabstop=0 noexpandtab
-set shiftwidth=4
+" 2 Spaces
+set tabstop=2
+set softtabstop=0 expandtab
+set shiftwidth=2
+set smarttab
 autocmd Filetype sh            setlocal sts=2 sw=2 et
 autocmd Filetype html          setlocal tw=80 spell spelllang=en_us
 autocmd Filetype markdown      setlocal tw=80 spell spelllang=en_us
