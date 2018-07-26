@@ -110,6 +110,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 alias zshconfig="vi ~/.zshrc"
 alias ohmyzsh="vi ~/.oh-my-zsh"
 alias vi="nvim"
+alias v=vi
 alias doot="echo thanks mr skeltal"
 alias aoeu="echo what is the problem you are trying to solve"
 alias aoeuhtns=aoeu
@@ -131,7 +132,11 @@ function mcd() {
     mkdir $1 && cd $1
 }
 function mark() {
-    markdown $1 > /tmp/md.html && firefox /tmp/md.html
+    out=/tmp/md.html
+    echo '<body style="max-width: 700px; padding: 30px;">' > $out
+    markdown $1 >> $out
+    echo '</body>' >> $out
+    firefox $out
 }
 function swp()
 {
