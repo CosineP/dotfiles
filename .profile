@@ -24,6 +24,7 @@ fi
 export PATH="$PATH:/opt/firefox:/opt/tor-browser_en-US:/opt/android-studio/bin:/opt/godot"
 export DMENU_CUSTOM_OPTIONS="-fn "-*-helvetica-medium-r-*-*-14-*-*-*-*-*-*-*" -nb "#222222" -nf "#bbbbbb" -sb "#005577" -sf "#eeeeee""
 export XDG_CONFIG_HOME=$HOME/.config
+export vblank_mode=2
 
 export PATH="$HOME/.cargo/bin:$PATH:/opt/godot"
 
