@@ -33,6 +33,7 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'andreshazard/vim-freemarker'
 Plug 'briancollins/vim-jst'
 Plug 'pangloss/vim-javascript'
+Plug 'kelwin/vim-smali'
 
 call plug#end()
 
@@ -79,6 +80,7 @@ set smarttab
 autocmd Filetype sh            setlocal sts=2 sw=2 et
 autocmd Filetype html          setlocal tw=80 spell spelllang=en_us
 autocmd Filetype markdown      setlocal tw=80 spell spelllang=en_us
+autocmd Filetype asciidoc      setlocal tw=80 spell spelllang=en_us
 autocmd BufRead  /tmp/jn       setlocal tw=80 spell spelllang=en_us
 autocmd BufRead  ~/journal.txt setlocal tw=80 spell spelllang=en_us
 " Other
