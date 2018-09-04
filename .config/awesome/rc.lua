@@ -514,6 +514,21 @@ for i = 1, 9 do
                      end
                   end,
                   {description = "move focused client to tag #"..i, group = "tag"}),
+        -- Move client to tag AND view tag
+        awful.key({ modkey, altkey }, "#" .. i + 9,
+                  function ()
+                     local screen = awful.screen.focused()
+                     local tag = screen.tags[i]
+                     if client.focus then
+                          if tag then
+                              client.focus:move_to_tag(tag)
+                          end
+                     end
+                     if tag then
+                          tag:view_only()
+                     end
+                  end,
+                  {description = "move focused client to tag #"..i, group = "tag"}),
         -- Toggle tag on focused client.
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
