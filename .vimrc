@@ -32,6 +32,11 @@ Plug 'tomlion/vim-solidity'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'nikvdp/ejs-syntax'
 Plug 'andreshazard/vim-freemarker'
+Plug 'briancollins/vim-jst'
+Plug 'pangloss/vim-javascript'
+Plug 'kelwin/vim-smali'
+Plug 'vimwiki/vimwiki'
+Plug 'tmhedberg/matchit'
 
 call plug#end()
 
