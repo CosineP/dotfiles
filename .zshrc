@@ -122,6 +122,8 @@ alias reboot /sbin/reboot
 # Shortcuts
 alias x=exit
 alias vimrc="vi ~/.vimrc"
+alias mocha="./node_modules/mocha/bin/mocha"
+alias emu="emulator -avd Nexus_5X_API_27_x86 -gpu host"
 # Function aliases
 function cs() {
     cd $1 && ls
