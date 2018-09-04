@@ -69,6 +69,9 @@ color dracula
 " Mappings
 vnoremap . :norm.<CR>
 nnoremap Y y$
+nnoremap <leader>D dt;
+nnoremap <leader>C ct;
+nnoremap <leader>$ $h
 nmap <F8> :TagbarToggle<CR>
 
 " General neccessities
