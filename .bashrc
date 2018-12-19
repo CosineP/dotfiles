@@ -136,3 +136,7 @@ export PATH="$PATH:/usr/local/cuda/bin:/opt/flex-sdk/bin:/opt/godot"
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH:/usr/lib64"
 export CUDA_HOME="/usr/local/cuda"
 
+
+# added by Miniconda2 installer
+export PATH="/home/luna/miniconda2/bin:$PATH"
+
