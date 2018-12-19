@@ -13,8 +13,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'quabug/vim-gdscript'
 Plug 'djoshea/vim-autoread'
 Plug 'severin-lemaignan/vim-minimap'
-" Imported from .bundle
 Plug 'dracula/vim'
+Plug 'nightsense/strawberry'
 Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
@@ -36,6 +36,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'kelwin/vim-smali'
 Plug 'vimwiki/vimwiki'
 Plug 'tmhedberg/matchit'
+Plug 'vim-scripts/Colortest'
 
 call plug#end()
 
@@ -61,9 +62,15 @@ endif
 " Auto-pairs
 let g:AutoPairsFlyMode = 1
 
-" Dracula
+" Syntax / Color
 syntax on
-color dracula
+set t_Co=256 
+color strawberry-light
+
+" General neccessities
+let mapleader = " "
+set number relativenumber
+set hidden
 
 " Mappings
 vnoremap . :norm.<CR>
