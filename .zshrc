@@ -122,6 +122,13 @@ alias reboot /sbin/reboot
 # Shortcuts
 alias x=exit
 alias vimrc="vi ~/.vimrc"
+# fd is fedi not find
+alias fdd='find . -type d -name'
+alias wprog='watch grep -e Dirty: -e Writeback: /proc/meminfo'
+# oh hell yeah
+alias gpl='curl https://www.gnu.org/licenses/gpl-3.0.txt > LICENSE'
+alias agpl='curl https://www.gnu.org/licenses/agpl-3.0.txt > LICENSE'
+unalias fd
 # Function aliases
 function cs() {
     cd $1 && ls
