@@ -94,3 +94,7 @@ set encoding=utf-8
 set splitbelow
 set splitright
 set mouse=a
+
+" Ctrl-P settings
+let g:ctrlp_custom_ignore = 'target'
+
