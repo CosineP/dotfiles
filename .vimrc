@@ -15,7 +15,7 @@ Plug 'djoshea/vim-autoread'
 Plug 'severin-lemaignan/vim-minimap'
 " Imported from .bundle
 Plug 'dracula/vim'
-Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
@@ -32,6 +32,8 @@ Plug 'tomlion/vim-solidity'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'nikvdp/ejs-syntax'
 Plug 'andreshazard/vim-freemarker'
+Plug 'ron-rs/ron.vim'
+Plug 'ElmCast/elm-vim'
 
 call plug#end()
 
@@ -61,9 +63,19 @@ let g:AutoPairsFlyMode = 1
 syntax on
 color dracula
 
+" This is buggy sometimes, so I'm not sure I want it
+" autocmd VimEnter * :Minimap
+
+" vim-elm settings
+let g:elm_format_autosave = 0
+
 " Mappings
 vnoremap . :norm.<CR>
 nnoremap Y y$
+nnoremap c- ct_
+nnoremap c_ cT_
+" This is kinda stupid but whatever
+nnoremap <F5> :term<Up><CR>
 nmap <F8> :TagbarToggle<CR>
 
 " General neccessities
