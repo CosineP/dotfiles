@@ -13,9 +13,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'quabug/vim-gdscript'
 Plug 'djoshea/vim-autoread'
 Plug 'severin-lemaignan/vim-minimap'
-" Imported from .bundle
 Plug 'dracula/vim'
 Plug 'rking/ag.vim'
+Plug 'nightsense/strawberry'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
@@ -34,6 +34,12 @@ Plug 'nikvdp/ejs-syntax'
 Plug 'andreshazard/vim-freemarker'
 Plug 'ron-rs/ron.vim'
 Plug 'ElmCast/elm-vim'
+Plug 'briancollins/vim-jst'
+Plug 'pangloss/vim-javascript'
+Plug 'kelwin/vim-smali'
+Plug 'vimwiki/vimwiki'
+Plug 'tmhedberg/matchit'
+Plug 'vim-scripts/Colortest'
 
 call plug#end()
 
@@ -59,9 +65,15 @@ endif
 " Auto-pairs
 let g:AutoPairsFlyMode = 1
 
-" Dracula
+" Syntax / Color
 syntax on
-color dracula
+set t_Co=256 
+color strawberry-light
+
+" General neccessities
+let mapleader = " "
+set number relativenumber
+set hidden
 
 " This is buggy sometimes, so I'm not sure I want it
 " autocmd VimEnter * :Minimap
@@ -76,6 +88,9 @@ nnoremap c- ct_
 nnoremap c_ cT_
 " This is kinda stupid but whatever
 nnoremap <F5> :term<Up><CR>
+nnoremap <leader>D dt;
+nnoremap <leader>C ct;
+nnoremap <leader>$ $h
 nmap <F8> :TagbarToggle<CR>
 
 " General neccessities
@@ -97,3 +112,7 @@ set encoding=utf-8
 set splitbelow
 set splitright
 set mouse=a
+
+" Ctrl-P settings
+let g:ctrlp_custom_ignore = 'target'
+

@@ -23,7 +23,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -99,6 +99,9 @@ if [ -x /usr/bin/dircolors ]; then
     #alias egrep='egrep --color=auto'
 fi
 
+[ -n "$PS1" ] && sh ~/.nightshell/strawberry-light
+eval `dircolors ~/.nightshell/dircolors`
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
@@ -129,6 +132,8 @@ alias wprog='watch grep -e Dirty: -e Writeback: /proc/meminfo'
 alias gpl='curl https://www.gnu.org/licenses/gpl-3.0.txt > LICENSE'
 alias agpl='curl https://www.gnu.org/licenses/agpl-3.0.txt > LICENSE'
 unalias fd
+alias mocha="./node_modules/mocha/bin/mocha"
+alias emu="emulator -avd Nexus_5X_API_27_x86 -gpu host"
 # Function aliases
 function cs() {
     cd $1 && ls
