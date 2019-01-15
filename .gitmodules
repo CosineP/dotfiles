@@ -4,3 +4,6 @@
 [submodule ".config/awesome/freedesktop"]
 	path = .config/awesome/freedesktop
 	url = git://github.com/copycat-killer/awesome-freedesktop.git
+[submodule "/home/luna/.nightshell"]
+	path = /home/luna/.nightshell
+	url = https://github.com/nightsense/nightshell
