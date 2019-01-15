@@ -16,6 +16,7 @@ xinput set-prop "Wacom Intuos Pro S Pen stylus" --type=float "Coordinate Transfo
 xmodmap /home/luna/.Xmodmap
 xrandr --output DVI-D-0 --pos 1920x200
 
+run urxvtd
 run redshift &
 run compton -b
 run xcape 
