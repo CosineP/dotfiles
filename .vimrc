@@ -15,12 +15,13 @@ Plug 'djoshea/vim-autoread'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'dracula/vim'
 Plug 'nightsense/strawberry'
-Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'lepture/vim-jinja'
@@ -31,6 +32,8 @@ Plug 'tpope/vim-surround'
 Plug 'tomlion/vim-solidity'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'andreshazard/vim-freemarker'
+Plug 'ron-rs/ron.vim'
+Plug 'ElmCast/elm-vim'
 Plug 'briancollins/vim-jst'
 Plug 'pangloss/vim-javascript'
 Plug 'kelwin/vim-smali'
@@ -45,6 +48,8 @@ set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 set ttimeoutlen=0
+let g:airline_theme='molokai'
+" let g:airline_theme='zenburn' "(a more minimalist option)
 
 " Deocomplete
 let g:deoplete#enable_at_startup = 1
@@ -72,9 +77,19 @@ let mapleader = " "
 set number relativenumber
 set hidden
 
+" This is buggy sometimes, so I'm not sure I want it
+" autocmd VimEnter * :Minimap
+
+" vim-elm settings
+let g:elm_format_autosave = 0
+
 " Mappings
 vnoremap . :norm.<CR>
 nnoremap Y y$
+nnoremap c- ct_
+nnoremap c_ cT_
+" This is kinda stupid but whatever
+nnoremap <F5> :term<Up><CR>
 nnoremap <leader>D dt;
 nnoremap <leader>C ct;
 nnoremap <leader>$ $h
