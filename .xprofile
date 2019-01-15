@@ -10,6 +10,7 @@ run () {
 xmodmap /home/luna/.Xmodmap
 libinput-gestures-setup start
 
+run urxvtd
 run redshift &
 run compton -b
 run xcape 
