@@ -40,6 +40,7 @@ Plug 'kelwin/vim-smali'
 Plug 'vimwiki/vimwiki'
 Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/Colortest'
+Plug 'zah/nim.vim'
 
 call plug#end()
 
