@@ -21,6 +21,7 @@ Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'lepture/vim-jinja'
@@ -49,6 +50,8 @@ set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 set ttimeoutlen=0
+let g:airline_theme='molokai'
+" let g:airline_theme='zenburn' "(a more minimalist option)
 
 " Deocomplete
 let g:deoplete#enable_at_startup = 1

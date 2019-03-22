@@ -20,8 +20,13 @@ export PATH=$PATH:/home/luna/miniconda2/bin
 export PATH=$PATH:/opt/tor-browser/Browser
 export PATH=$PATH:~/src/fedi/fd
 export PATH=$PATH:/opt/intellij/bin
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools
 
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle
 
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cuda/extras/CUPTI/lib64
+
+source ~/.cargo/env
+
+export vblank_mode=2
 
