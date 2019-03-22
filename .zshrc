@@ -113,7 +113,10 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 alias zshconfig="vi ~/.zshrc"
 alias ohmyzsh="vi ~/.oh-my-zsh"
 alias vi="nvim"
-alias v=vi
+# Trying to use kak for a bit so we're gonna train my muscle memory
+# alias v=vi
+alias v='echo "you mean kak."; sleep 1; kak'
+alias k=kak
 alias doot="echo thanks mr skeltal"
 alias aoeu="echo what is the problem you are trying to solve"
 alias aoeuhtns=aoeu
