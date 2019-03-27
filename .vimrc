@@ -78,6 +78,7 @@ color strawberry-light
 let mapleader = " "
 set number relativenumber
 set hidden
+set so=5
 
 " This is buggy sometimes, so I'm not sure I want it
 " autocmd VimEnter * :Minimap
