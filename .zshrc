@@ -135,6 +135,7 @@ unalias fd
 alias mocha="./node_modules/mocha/bin/mocha"
 alias emu="emulator -avd Nexus_5X_API_27_x86 -gpu host"
 alias noblur='pkill compton && compton --config ~/.config/compton-video.conf -b'
+alias blur='pkill compton && compton -b'
 # Function aliases
 function cs() {
     cd $1 && ls
