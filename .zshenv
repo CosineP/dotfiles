@@ -8,6 +8,7 @@ export PATH=$PATH:~/.cabal/bin
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:/opt/spring/bin:/opt/flutter/bin
 export PATH=$PATH:$HOME/src/fabric/fabric-samples/bin
+export PATH=$PATH:$HOME/.mozbuild/arcanist/bin:$HOME/.mozbuild/moz-phab
 export PATH=$PATH:/opt/godot
 export PATH=$PATH:/opt/android-studio/bin
 export PATH=$PATH:$ANDROID_HOME/tools
