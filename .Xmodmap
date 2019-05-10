@@ -1,3 +1,4 @@
+! Switch Capslock and Control for xcape
 keycode 66 = Control_L
 clear Lock
 add Control = Control_L
