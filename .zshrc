@@ -167,7 +167,7 @@ function cb
 }
 
 # Env variables
-export EDITOR="nvim"
+export EDITOR="kak"
 export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib:/usr/lib64:$LD_LIBRARY_PATH:/usr/local/lib"
 export TP_GAE="tpassing-175603"
 export TP_GAE_SQL="tpassing-175603:us-central1:transpassing"
