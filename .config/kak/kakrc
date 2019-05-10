@@ -1,0 +1,35 @@
+# Source plug
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+
+# Plugins
+plug "alexherbo2/volatile-highlighter.kak"
+
+# Set up our tabs
+#set global tabstop 4
+set global indentwidth 4
+
+set global scrolloff 5,5
+
+# Soft wrap
+addhl global/ wrap -indent -marker '→'
+# Show matching
+addhl global/ show-matching
+# Hard wrap on = (vim gq)
+map global normal = '|fmt -w $kak_opt_autowrap_column<ret>'
+
+# Vim-like scrolling
+map global normal <c-e> 'vj'
+map global normal <c-y> 'vk'
+
+# :x to exit
+alias global x write-quit
+alias global bd delete-buffer
+
+# Line numbers
+add-highlighter global/ number-lines -relative -hlcursor
+
+# Things that need to be on window create go here
+hook global WinCreate .* %{
+    volatile-highlighter-enable
+}
+
