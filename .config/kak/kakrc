@@ -3,6 +3,12 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 # Plugins
 plug "alexherbo2/volatile-highlighter.kak"
+plug "andreyorst/smarttab.kak" %{
+    set-option global softtabstop 4
+}
+plug "https://framagit.org/koyasik/kakoune-gdscript"
+
+colorscheme reeder
 
 # Set up our tabs
 #set global tabstop 4
@@ -31,5 +37,7 @@ add-highlighter global/ number-lines -relative -hlcursor
 # Things that need to be on window create go here
 hook global WinCreate .* %{
     volatile-highlighter-enable
+    # smarttab is from the plugin, it allows tabs+spaces
+    #smarttab
 }
 
