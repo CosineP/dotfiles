@@ -7,12 +7,7 @@ run () {
   fi
 }
 
-xsetwacom set "Wacom Intuos Pro S Pen stylus" Area 0 0 31496 17717
-# 0.54545 is ratio of big monitor to total, used to be 0.5 (1/2 the screen)
-# but now I have a big and a small
-# Height ratio comes from offset I've put on smallmon:
-# total height is 1100, desired is 1080
-xinput set-prop "Wacom Intuos Pro S Pen stylus" --type=float "Coordinate Transformation Matrix" 0.54545 0 0 0 0.9818 0 0 0 1
+./.wacom.sh
 xmodmap /home/luna/.Xmodmap
 xrandr --output DVI-D-0 --pos 1920x200
 
