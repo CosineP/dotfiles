@@ -15,12 +15,12 @@ xsetwacom set "$stylus_name" Area 0 0 31496 17717
 xinput set-prop "$stylus_name" --type=float "Coordinate Transformation Matrix" 0.54545 0 0 0 0.9818 0 0 0 1
 
 # Laid out the way they are on the thing
-xsetwacom set "$pad_name" Button 2 "key ctrl z"
-xsetwacom set "$pad_name" Button 3 "key ctrl shift z"
-xsetwacom set "$pad_name" Button 8 "key ctrl +space"
+xsetwacom set "$pad_name" Button 2 "key +ctrl"
+xsetwacom set "$pad_name" Button 3 "key ctrl +space" # Krita zoom
+xsetwacom set "$pad_name" button 8 "key shift +space" # Krita rotate
 # TODO: Do the scrolly here!
-xsetwacom --set "$pad_name" button 9 "key shift +space"
-xsetwacom --set "$pad_name" button 10 "key e"
-# Two more to set!
+xsetwacom set "$pad_name" Button 9 "key ctrl z"
+xsetwacom set "$pad_name" Button 10 "key ctrl shift z"
+#xsetwacom set "$pad_name" button 11 "key ?"
 
 exit 0
