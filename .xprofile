@@ -7,6 +7,7 @@ run () {
   fi
 }
 
+./.wacom.sh
 xmodmap /home/luna/.Xmodmap
 libinput-gestures-setup start
 
