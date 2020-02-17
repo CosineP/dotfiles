@@ -32,3 +32,7 @@
 *.perl-ext-common: default,matcher
 *.url-launcher: /usr/bin/xdg-open
 *.matcher.button: 1
+
+! vncviewer
+grabKeyboard: true
+

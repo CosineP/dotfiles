@@ -28,3 +28,4 @@ export vblank_mode=2
 
 export PATH="$HOME/.cargo/bin:$PATH:/opt/godot"
 
+PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"

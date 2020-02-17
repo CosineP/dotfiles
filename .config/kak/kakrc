@@ -1,19 +1,24 @@
-# Source plug
+## Source plug
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
-
-# Plugins
+#
+## Plugins
 plug "alexherbo2/volatile-highlighter.kak"
-plug "andreyorst/smarttab.kak" %{
+plug "andreyorst/smarttab.kak" defer smarttab %{
     set-option global softtabstop 4
+} config %{
+    hook global WinSetOption filetype=(rust|kak) expandtab
+    hook global WinSetOption filetype=(sfg) smarttab
 }
 plug "https://framagit.org/koyasik/kakoune-gdscript"
+plug "chambln/kakoune-readline"
+plug "ul/kak-lsp" do %{
+    cargo install --locked --force --path .
+}
+plug "https://gitlab.com/Screwtapello/kakoune-cargo"
 
 colorscheme reeder
 
-# Set up our tabs
-#set global tabstop 4
-set global indentwidth 4
-
+set global tabstop 4
 set global scrolloff 5,5
 
 # Soft wrap
@@ -37,7 +42,56 @@ add-highlighter global/ number-lines -relative -hlcursor
 # Things that need to be on window create go here
 hook global WinCreate .* %{
     volatile-highlighter-enable
-    # smarttab is from the plugin, it allows tabs+spaces
-    #smarttab
+}
+
+# maybe |python|go|javascript|typescript|c|cpp
+hook global WinSetOption filetype=(rust) %{
+    lsp-enable-window
+}
+
+# preserve indentation
+hook global WinSetOption filetype=sfg %{
+    hook global InsertChar \n %{ exec -draft k<a-x> s^\h+<ret>y j<a-h>P }
+}
+
+# copied from wiki-ide
+def ide %{
+    rename-client main
+    set global jumpclient main
+
+    new rename-client tools
+    set global toolsclient tools
+
+    new rename-client docs
+    set global docsclient docs
+}
+
+# sleuth
+#hook global BufOpenFile .* %{ evaluate-commands -buffer %val(hook_param) %{ try %{
+  #execute-keys '%s^\t<ret>'
+  #smarttab
+#}}}
+
+# copied from https://gitlab.com/Screwtapello/kakoune-cargo
+hook global WinSetOption filetype=rust %{
+    # If rustfmt is available, let's set up formatting.
+    evaluate-commands %sh{
+        if command -v rustfmt >/dev/null 2>&1; then
+            printf "%s\n" "set-option window formatcmd rustfmt"
+            # If there's a config file here,
+            # let's do formatting by default.
+            if [ -f rustfmt.toml ]; then
+                printf "%s\n" "hook -group rust-auto-format window BufWritePre .* format"
+            else
+                printf "%s\n" "echo -debug %{rustfmt.toml not found}"
+            fi
+        else
+            printf "%s\n" "echo -debug %{rustfmt not available}"
+        fi
+    }
+
+    hook global WinSetOption filetype=(?!rust).* %{
+        remove-hooks window rust-auto-format
+    }
 }
 

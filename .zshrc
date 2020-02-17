@@ -1,3 +1,6 @@
+# Profiling https://htr3n.github.io/2018/07/faster-zsh/
+zmodload zsh/zprof
+
 # Path to your oh-my-zsh installation.
 export ZSH=/home/luna/.oh-my-zsh
 
@@ -47,18 +50,15 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git zsh-autosuggestions)
 
-# source $ZSH/oh-my-zsh.sh
-
 # Antigen
 source /usr/share/zsh-antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
+export NVM_LAZY_LOAD=true
+antigen bundle lukechilds/zsh-nvm
 antigen bundle git
 antigen bundle common-aliases
-antigen bundle debian
-antigen bundle pip
-antigen bundle python
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
@@ -138,9 +138,11 @@ unalias fd
 alias mocha="./node_modules/mocha/bin/mocha"
 alias gat="cb ~/github-access-token"
 alias emu="emulator -avd Nexus_5X_API_27_x86 -gpu host"
-alias noblur='pkill compton && compton --config ~/.config/compton-video.conf -b'
+alias noblur='pkill compton && compton -i1.0 -b'
 alias blur='pkill compton && compton -b'
 alias ck='cargo check --all-targets --color=always LL'
+alias eljs='node ~/src/eljs/index.js running "$@"'
+alias teljs='node ~/src/eljs/index.js testing "$@"'
 # Function aliases
 function cs() {
     cd $1 && ls
@@ -173,8 +175,4 @@ export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib:/usr/lib64:$LD_LIBRARY_PATH:/usr/lo
 export TP_GAE="tpassing-175603"
 export TP_GAE_SQL="tpassing-175603:us-central1:transpassing"
 export TPASSING="ec2-13-58-183-86.us-east-2.compute.amazonaws.com"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

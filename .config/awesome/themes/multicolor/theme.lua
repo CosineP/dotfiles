@@ -51,6 +51,7 @@ theme.widget_mail                               = theme.confdir .. "/icons/mail.
 theme.widget_batt                               = theme.confdir .. "/icons/bat.png"
 theme.widget_clock                              = theme.confdir .. "/icons/clock.png"
 theme.widget_vol                                = theme.confdir .. "/icons/spkr.png"
+theme.widget_brightness                         = theme.confdir .. "/icons/sun.png"
 theme.taglist_squares_sel                       = theme.confdir .. "/icons/square_a.png"
 theme.taglist_squares_unsel                     = theme.confdir .. "/icons/square_b.png"
 theme.tasklist_plain_task_name                  = true
@@ -176,6 +177,7 @@ local temp = lain.widget.temp({
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_batt)
 local bat = lain.widget.bat({
+    ac = "ADP0", -- my laptop's ac is called ADP0 not AC0 for some reason (USBC?)
     settings = function()
         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
 
@@ -252,6 +254,16 @@ theme.mpd = lain.widget.mpd({
     end
 })
 
+-- Brightness
+local brighticon = wibox.widget.imagebox(theme.widget_brightness)
+local backlight = awful.widget.watch("brightnessctl g", 10,
+    function(widget, stdout)
+        local scalar = tonumber(stdout:match("(%d+)"))
+        local perc = 100 * scalar / 7500 -- from `brightnessctl m`, i just pasted because i'm dumb
+        widget:set_text(string.format(" %.0f%%", perc))
+    end
+)
+
 function theme.at_screen_connect(s)
     -- Quake application
     s.quake = lain.util.quake({ app = awful.util.terminal })
@@ -305,6 +317,8 @@ function theme.at_screen_connect(s)
             --mail.widget,
             baticon,
             bat.widget,
+            brighticon,
+            backlight,
             weathericon,
             theme.weather.widget,
             --theme.mail.widget,
