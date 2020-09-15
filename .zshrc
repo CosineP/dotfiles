@@ -1,6 +1,15 @@
 # Profiling https://htr3n.github.io/2018/07/faster-zsh/
 zmodload zsh/zprof
 
+#cat /etc/motd
+# my own little implementation of fortune
+function fortune
+{
+    echo "\n"
+    sort -R ~/.fortunes | head -n1 | fold -s -w 72 | sed 's/^/    /'
+}
+fortune
+
 # Path to your oh-my-zsh installation.
 export ZSH=/home/luna/.oh-my-zsh
 
@@ -72,6 +81,9 @@ autoload zmv
 
 eval $(thefuck --alias)
 
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -105,6 +117,8 @@ eval `dircolors ~/.nightshell/dircolors`
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+setopt histignorespace
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -113,10 +127,11 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 alias zshconfig="vi ~/.zshrc"
 alias ohmyzsh="vi ~/.oh-my-zsh"
 alias vi="nvim"
-# Trying to use kak for a bit so we're gonna train my muscle memory
-# alias v=vi
-alias v='echo "you mean kak."; sleep 1; kak'
-alias k=kak
+function k() {
+    kak -c lapis -e "change-directory `pwd`" "$@"
+}
+#alias k='kak -c lapis'
+alias e=editor
 alias doot="echo thanks mr skeltal"
 alias aoeu="echo what is the problem you are trying to solve"
 alias aoeuhtns=aoeu
@@ -138,12 +153,20 @@ unalias fd
 alias mocha="./node_modules/mocha/bin/mocha"
 alias gat="cb ~/github-access-token"
 alias emu="emulator -avd Nexus_5X_API_27_x86 -gpu host"
-alias noblur='pkill compton && compton -i1.0 -b'
-alias blur='pkill compton && compton -b'
+alias noblur='pkill compton; compton -i1.0 -b'
+alias compnorm='pkill compton; compton -b'
+alias blur='compnorm'
 alias ck='cargo check --all-targets --color=always LL'
-alias eljs='node ~/src/eljs/index.js running "$@"'
-alias teljs='node ~/src/eljs/index.js testing "$@"'
+alias kmm='k /tmp/hmm'
+alias eljs='node ~/src/ElementaryJS/eval/eval.js'
+alias tryrs='kak /tmp/test.rs; rustc /tmp/test.rs -o /tmp/test-rust && /tmp/test-rust'
+alias tryc='kak /tmp/test.c; gcc /tmp/test.c -o /tmp/test-c && /tmp/test-c'
+alias clear='clear && fortune'
 # Function aliases
+function bwvid() { curl https://billwurtz.com/videos.html | grep '<A' | shuf | grep -oP 'HREF="\K([^"]*)(?=")' | xargs -d'\n' printf 'https://billwurtz.com/%b\n' | xargs -d'\n' vlc }
+function teljs() {
+    eljs "$@" 1
+}
 function cs() {
     cd $1 && ls
 }
@@ -168,6 +191,48 @@ function cb
 {
     cat "$@" | xclip -sel clip
 }
+function tv
+{
+    setup-watch
+    echo "Press enter to go back to laptop mode: "
+    read _
+    teardown-watch
+}
+function setup-watch
+{
+    # Disable my pretties that fuck with gaming
+    pkill redshift
+    # Compton fanciness is in the way. But we still need compton for vsync
+    noblur
+    # Make sure the TV is working
+    xrandr --output eDP-1 --mode 1920x1080 --output HDMI-1 --mode 1920x1080 --same-as eDP-1
+    # Use HDMI audio
+    pacmd set-card-profile 0 output:hdmi-stereo
+}
+function teardown-watch
+{
+    # Restart these nice services
+    redshift &
+    # Reset compton to look nice again
+    blur
+    # TODO: Do we need an xrandr set? I think it's fine for now
+    pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo
+}
+function game
+{
+    setup-watch
+    # And, go!
+    steam -bigpicture
+    # Automatically switch sound back when steam is exited
+    teardown-watch
+}
+function gray
+{
+    pkill compton
+    compton --backend glx --glx-fshader-win "`cat ~/.config/grayscale.gsls`" -b
+    # desktop isn't owned by compton so this is a workaround
+    nitrogen --set-zoom-fill ~/Pictures/bw/bw-arms-ships.png
+}
 
 # Env variables
 export EDITOR="kak"
@@ -176,3 +241,8 @@ export TP_GAE="tpassing-175603"
 export TP_GAE_SQL="tpassing-175603:us-central1:transpassing"
 export TPASSING="ec2-13-58-183-86.us-east-2.compute.amazonaws.com"
 
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"

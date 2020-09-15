@@ -10,10 +10,14 @@ run () {
 ./.wacom.sh
 xmodmap /home/luna/.Xmodmap
 libinput-gestures-setup start
+# this.... shouldn't be necessary?? but
+xset +fp ~/.local/share/fonts
 
 run urxvtd
+run kak -s lapis -d
 run redshift &
 run compton -b
-run xcape 
+run xcape
+run kdeconnect-indicator
 nitrogen --restore
 

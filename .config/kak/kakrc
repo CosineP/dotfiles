@@ -8,6 +8,7 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
 } config %{
     hook global WinSetOption filetype=(rust|kak) expandtab
     hook global WinSetOption filetype=(sfg) smarttab
+    hook global WinSetOption filetype=(c) softtabstop 2
 }
 plug "https://framagit.org/koyasik/kakoune-gdscript"
 plug "chambln/kakoune-readline"
@@ -16,9 +17,11 @@ plug "ul/kak-lsp" do %{
 }
 plug "https://gitlab.com/Screwtapello/kakoune-cargo"
 
-colorscheme reeder
+colorscheme pinkie
 
 set global tabstop 4
+map global insert <tab> '<a-;><gt>'
+map global insert <s-tab> '<a-;><lt>'
 set global scrolloff 5,5
 
 # Soft wrap
@@ -39,6 +42,8 @@ alias global bd delete-buffer
 # Line numbers
 add-highlighter global/ number-lines -relative -hlcursor
 
+map global normal \' ':lsp-hover<ret>'
+
 # Things that need to be on window create go here
 hook global WinCreate .* %{
     volatile-highlighter-enable
@@ -47,12 +52,19 @@ hook global WinCreate .* %{
 # maybe |python|go|javascript|typescript|c|cpp
 hook global WinSetOption filetype=(rust) %{
     lsp-enable-window
+    lsp-signature-help-enable
 }
 
 # preserve indentation
 hook global WinSetOption filetype=sfg %{
     hook global InsertChar \n %{ exec -draft k<a-x> s^\h+<ret>y j<a-h>P }
 }
+
+# rustfmt
+# filetype=rust somehow?
+#hook global BufWritePre .* %{
+#    format
+#}
 
 # copied from wiki-ide
 def ide %{
@@ -75,23 +87,14 @@ def ide %{
 # copied from https://gitlab.com/Screwtapello/kakoune-cargo
 hook global WinSetOption filetype=rust %{
     # If rustfmt is available, let's set up formatting.
-    evaluate-commands %sh{
-        if command -v rustfmt >/dev/null 2>&1; then
-            printf "%s\n" "set-option window formatcmd rustfmt"
-            # If there's a config file here,
-            # let's do formatting by default.
-            if [ -f rustfmt.toml ]; then
-                printf "%s\n" "hook -group rust-auto-format window BufWritePre .* format"
-            else
-                printf "%s\n" "echo -debug %{rustfmt.toml not found}"
-            fi
-        else
-            printf "%s\n" "echo -debug %{rustfmt not available}"
-        fi
-    }
-
+    hook -group rust-auto-format window BufWritePre .* format
     hook global WinSetOption filetype=(?!rust).* %{
         remove-hooks window rust-auto-format
     }
 }
+
+# this is to train me to use keys i need to use
+declare-option str training 'DONT FORGET TO USE f '
+set global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} %opt{training}{{context_info}} {{mode_info}} - %val{client}@[%val{session}]'
+map global normal f ':set-option global training ""<ret>f'
 
