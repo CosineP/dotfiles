@@ -33,7 +33,7 @@ evaluate-commands %sh{
         face global identifier ${purple}
         face global string     default,${pink_bg}
         # ????
-        face global error      rgb:a60a3b+b
+        face global error      default,rgb:ff6e86+ba
         face global keyword    rgb:3287ff+b
         face global operator   rgb:212121
         face global attribute  ${purple}+u
@@ -68,6 +68,7 @@ evaluate-commands %sh{
         face global MenuInfo           default,${black}
         face global Information        ${text},${lavendar_bg}
         face global Error              ${text},${pink_bg}
+        face global DiagnosticError    ${text},rgb:ff8a9d+b
         face global StatusLine         ${text},${lavendar_bg}
         face global StatusLineMode     ${text},${pink_bg}
         face global StatusLineInfo     ${text}+b

@@ -8,3 +8,5 @@
 	new = !git init && git symbolic-ref HEAD refs/heads/main
 [push]
 	default = current
+[init]
+	defaultBranch = main

@@ -5,4 +5,5 @@ add Control = Control_L
 keycode 255 = Escape
 keycode 9 = Caps_Lock
 add Lock = Caps_Lock
+keycode 135 = dead_greek
 

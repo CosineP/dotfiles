@@ -23,6 +23,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
                       require("awful.hotkeys_popup.keys")
 local my_table      = --[[awful.util.table or  --]]gears.table -- 4.{0,1} compatibility
 local volume_control= require("volume-control")
+-- https://github.com/guotsuan/awesome-revelation
+local revelation    = require("revelation")
 -- }}}
 
 volumecfg = volume_control({})
@@ -77,7 +79,7 @@ local chosen_theme = "multicolor"
 -- local chosen_theme = themes[5] -- FIX: this?
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "urxvtc"
+local terminal     = "kitty"
 local editor       = "vim"
 local gui_editor   = "gvim"
 local browser      = "firefox"
@@ -214,6 +216,7 @@ lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+revelation.init()
 -- }}}
 
 -- {{{ Menu
@@ -265,9 +268,6 @@ root.buttons(my_table.join(
 
 -- {{{ Key bindings
 globalkeys = my_table.join(
-    -- Take a screenshot
-    -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() os.execute("screenshot") end),
 
     -- Hotkeys
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -289,15 +289,19 @@ globalkeys = my_table.join(
     awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
     awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
+    awful.key({}, "Print",                function () awful.spawn.with_shell("scrot") end),
+    
+    awful.key({ modkey, }, "Tab",         revelation),
+    
 
     -- Default client focus
-    awful.key({ altkey,           }, "j",
+    awful.key({ altkey,           }, "Tab",
         function ()
             awful.client.focus.byidx( 1)
         end,
         {description = "focus next by index", group = "client"}
     ),
-    awful.key({ altkey,           }, "k",
+    awful.key({ altkey, "Shift"   }, "Tab",
         function ()
             awful.client.focus.byidx(-1)
         end,
@@ -344,7 +348,7 @@ globalkeys = my_table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
+    awful.key({ modkey,           }, "'",
         function ()
             awful.client.focus.history.previous()
             if client.focus then
@@ -369,7 +373,7 @@ globalkeys = my_table.join(
     awful.key({ modkey, altkey }, "r", function () awful.spawn.with_shell("/sbin/reboot") end),
 
     -- On the fly useless gaps change
-    awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end),
+    awful.key({ altkey, "Control" }, "=", function () lain.util.useless_gaps_resize(1) end),
     awful.key({ altkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end),
 
     -- Dynamic tagging
@@ -427,9 +431,9 @@ globalkeys = my_table.join(
     --          {description = "show weather", group = "widgets"}),
 
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("sudo brightnessctl s 10%+") end,
+    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("brightnessctl s 10%+") end,
               {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("sudo brightnessctl s 10%-") end,
+    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("brightnessctl s 10%-") end,
               {description = "-10%", group = "hotkeys"}),
 
     -- Copy primary to clipboard (terminals to gtk)

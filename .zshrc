@@ -1,6 +1,8 @@
 # Profiling https://htr3n.github.io/2018/07/faster-zsh/
 zmodload zsh/zprof
 
+[ -n "$PS1" ] && sh ~/.nightshell/strawberry-light
+
 #cat /etc/motd
 # my own little implementation of fortune
 function fortune
@@ -111,7 +113,6 @@ if [ -x /usr/bin/dircolors ]; then
     #alias egrep='egrep --color=auto'
 fi
 
-[ -n "$PS1" ] && sh ~/.nightshell/strawberry-light
 eval `dircolors ~/.nightshell/dircolors`
 
 # ssh
@@ -128,9 +129,20 @@ alias zshconfig="vi ~/.zshrc"
 alias ohmyzsh="vi ~/.oh-my-zsh"
 alias vi="nvim"
 function k() {
-    kak -c lapis -e "change-directory `pwd`" "$@"
+    # each directory will have its own session now
+    name=`echo "$PWD" | tr -d / | tail -c 8`
+    if ! pgrep -f "kak -s $name" > /dev/null; then
+        echo "$name" > /tmp/last-kak
+        # you might be inclined to use kak's -d alone, but it hangs terminals!!
+        daemon -D "$PWD" -- kak -s "$name" -d
+    fi
+    kak -c "$name" "$@"
 }
-#alias k='kak -c lapis'
+# connect to the last opened session
+function kk() {
+    name=`cat /tmp/last-kak`
+    kak -c "$name" "$@"
+}
 alias e=editor
 alias doot="echo thanks mr skeltal"
 alias aoeu="echo what is the problem you are trying to solve"
@@ -154,14 +166,20 @@ alias mocha="./node_modules/mocha/bin/mocha"
 alias gat="cb ~/github-access-token"
 alias emu="emulator -avd Nexus_5X_API_27_x86 -gpu host"
 alias noblur='pkill compton; compton -i1.0 -b'
-alias compnorm='pkill compton; compton -b'
+# the nitrogen means blur can be used to undo `gray`
+alias compnorm='pkill compton; compton -b; nitrogen --restore &'
 alias blur='compnorm'
 alias ck='cargo check --all-targets --color=always LL'
 alias kmm='k /tmp/hmm'
 alias eljs='node ~/src/ElementaryJS/eval/eval.js'
-alias tryrs='kak /tmp/test.rs; rustc /tmp/test.rs -o /tmp/test-rust && /tmp/test-rust'
-alias tryc='kak /tmp/test.c; gcc /tmp/test.c -o /tmp/test-c && /tmp/test-c'
+alias tryrs='kk /tmp/test.rs; rustc /tmp/test.rs -o /tmp/test-rust && /tmp/test-rust'
+alias tryc='kk /tmp/test.c; gcc /tmp/test.c -o /tmp/test-c && /tmp/test-c'
 alias clear='clear && fortune'
+# warp here
+alias wh='echo "$PWD" > /tmp/zsh-warp'
+# warp now
+alias wn='cd `cat /tmp/zsh-warp`'
+alias gray='~/Documents/gray.sh'
 # Function aliases
 function bwvid() { curl https://billwurtz.com/videos.html | grep '<A' | shuf | grep -oP 'HREF="\K([^"]*)(?=")' | xargs -d'\n' printf 'https://billwurtz.com/%b\n' | xargs -d'\n' vlc }
 function teljs() {
@@ -173,7 +191,8 @@ function cs() {
 function mcd() {
     mkdir $1 && cd $1
 }
-function mark() {
+# Open MarkDown
+function omd() {
     out=/tmp/md.html
     echo '<body style="max-width: 700px; padding: 30px;">' > $out
     markdown $1 >> $out
@@ -191,28 +210,33 @@ function cb
 {
     cat "$@" | xclip -sel clip
 }
+function insomnia
+{
+    systemd-inhibit sh -c 'echo "press enter to allow sleep. "; read _'
+}
 function tv
 {
     setup-watch
-    echo "Press enter to go back to laptop mode: "
-    read _
+    x11vnc -forever &
+    # Combines not going to sleep with a read prompt
+    systemd-inhibit sh -c "$*"
     teardown-watch
 }
 function setup-watch
 {
     # Disable my pretties that fuck with gaming
     pkill redshift
-    # Compton fanciness is in the way. But we still need compton for vsync
-    noblur
     # Make sure the TV is working
     xrandr --output eDP-1 --mode 1920x1080 --output HDMI-1 --mode 1920x1080 --same-as eDP-1
+    # Compton fanciness is in the way. But we still need compton for vsync
+    noblur
     # Use HDMI audio
     pacmd set-card-profile 0 output:hdmi-stereo
 }
 function teardown-watch
 {
     # Restart these nice services
-    redshift &
+    daemon redshift
     # Reset compton to look nice again
     blur
     # TODO: Do we need an xrandr set? I think it's fine for now
@@ -225,13 +249,6 @@ function game
     steam -bigpicture
     # Automatically switch sound back when steam is exited
     teardown-watch
-}
-function gray
-{
-    pkill compton
-    compton --backend glx --glx-fshader-win "`cat ~/.config/grayscale.gsls`" -b
-    # desktop isn't owned by compton so this is a workaround
-    nitrogen --set-zoom-fill ~/Pictures/bw/bw-arms-ships.png
 }
 
 # Env variables

@@ -12,8 +12,8 @@ xmodmap /home/luna/.Xmodmap
 libinput-gestures-setup start
 # this.... shouldn't be necessary?? but
 xset +fp ~/.local/share/fonts
+xrdb ~/.Xresources
 
-run urxvtd
 run kak -s lapis -d
 run redshift &
 run compton -b
