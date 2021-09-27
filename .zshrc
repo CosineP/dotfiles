@@ -169,6 +169,7 @@ alias noblur='pkill compton; compton -i1.0 -b'
 # the nitrogen means blur can be used to undo `gray`
 alias compnorm='pkill compton; compton -b; nitrogen --restore &'
 alias blur='compnorm'
+alias compzoom='pkill compton; compton --config ~/.config/compton-zoom.conf -b'
 alias ck='cargo check --all-targets --color=always LL'
 alias kmm='k /tmp/hmm'
 alias eljs='node ~/src/ElementaryJS/eval/eval.js'
@@ -250,14 +251,6 @@ function game
     # Automatically switch sound back when steam is exited
     teardown-watch
 }
-
-# Env variables
-export EDITOR="kak"
-export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib:/usr/lib64:$LD_LIBRARY_PATH:/usr/local/lib"
-export TP_GAE="tpassing-175603"
-export TP_GAE_SQL="tpassing-175603:us-central1:transpassing"
-export TPASSING="ec2-13-58-183-86.us-east-2.compute.amazonaws.com"
-
 
 export WASMTIME_HOME="$HOME/.wasmtime"
 

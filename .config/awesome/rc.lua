@@ -289,7 +289,7 @@ globalkeys = my_table.join(
     awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
     awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
-    awful.key({}, "Print",                function () awful.spawn.with_shell("scrot") end),
+    awful.key({}, "Print",                function () awful.spawn.with_shell("scrot -s") end),
     
     awful.key({ modkey, }, "Tab",         revelation),
     

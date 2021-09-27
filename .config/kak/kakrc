@@ -6,7 +6,7 @@ plug "alexherbo2/volatile-highlighter.kak"
 plug "andreyorst/smarttab.kak" defer smarttab %{
     set-option global softtabstop 4
 } config %{
-    hook global WinSetOption filetype=(rust|kak) expandtab
+    hook global WinSetOption filetype=(rust|kak|typescript|tsx) expandtab
     hook global WinSetOption filetype=(sfg) smarttab
     hook global WinSetOption filetype=(c) softtabstop 2
 }
@@ -23,6 +23,7 @@ plug "listentolist/kakoune-rainbow" domain "gitlab.com" config %{
     # map global user R ": rmhl window/ranges_rainbow_specs<ret>" \
     #     -docstring "remove rainbow highlighter"
 }
+plug "stoand/kakoune-idris"
 
 colorscheme pinkie
 
@@ -57,7 +58,7 @@ hook global WinCreate .* %{
 }
 
 # maybe |python|go|javascript
-hook global WinSetOption filetype=(rust|typescript|java|cpp|c) %{
+hook global WinSetOption filetype=(rust|tsx|typescript|java|cpp|c) %{
     lsp-enable-window
     lsp-signature-help-enable
 }
@@ -66,6 +67,9 @@ hook global WinSetOption filetype=(rust|typescript|java|cpp|c) %{
 hook global WinSetOption filetype=sfg %{
     hook global InsertChar \n %{ exec -draft k<a-x> s^\h+<ret>y j<a-h>P }
 }
+
+# idris2
+map global normal <minus> ':enter-user-mode idris-ide<ret>'
 
 # rustfmt
 # filetype=rust somehow?
@@ -97,9 +101,26 @@ hook global WinSetOption filetype=rust %{
     set-option window formatcmd rustfmt
     hook -group rust-auto-format window BufWritePre .* format
     lsp-enable-window
-    lsp-signature-help-enable
+    lsp-auto-signature-help-enable
     hook global WinSetOption filetype=(?!rust).* %{
         remove-hooks window rust-auto-format
+    }
+}
+
+hook global WinSetOption filetype=(tsx|typescript) %{
+    set global tabstop 2
+    set global tabstop 2
+    # Yeah turns out we don't actually use prettier hahahah
+    #set-option window formatcmd 'sh -c "NVM_DIR=$HOME/.nvm . ~/.nvm/nvm.sh && prettier --stdin-filepath something.tsx"'
+    #set-option buffer lintcmd 'sh -c "NVM_DIR=$HOME/.nvm . ~/.nvm/nvm.sh && npx eslint --config .eslintrc.json --format=/home/luna/.nvm/versions/node/v15.5.1/lib/node_modules/eslint-formatter-kakoune" --stdin-filepath something.tsx'
+    #set-option buffer lintcmd 'cat $HOME/lint'
+    #lint-enable
+    #hook -group ts-auto-format window BufWritePre .* format
+    #hook -group ts-auto-format window BufWritePre .* lint
+    lsp-enable-window
+    lsp-auto-signature-help-enable
+    hook global WinSetOption filetype=(?!(tsx|typescript)).* %{
+        remove-hooks window ts-auto-format
     }
 }
 

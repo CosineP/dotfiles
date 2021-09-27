@@ -18,7 +18,8 @@ export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools
 export PATH=$PATH:/opt/hop/bin
 export PATH=$PATH:~/src/depot_tools
 export PATH=$PATH:~/.racket/7.9/bin
-for opt_dir in `find /opt -maxdepth 1 -type d -print0`; do
+export PATH=$PATH:~/.idris2/bin
+find /opt -maxdepth 1 -type d | while read opt_dir; do
 	export PATH="$PATH:$opt_dir"
 done
 
@@ -30,8 +31,11 @@ export GOPATH=~/.go
 export LV2_PATH="$HOME/.lv2:/usr/local/lib/lv2:/usr/lib/lv2"
 export LXVST_PATH="$HOME/.vst:/usr/lib/vst"
 export TEXMFHOME="~/.texmf"
+export IDRIS2_CG=racket
 
 source ~/.cargo/env
 
 export vblank_mode=2
 
+export EDITOR="kak"
+export LD_LIBRARY_PATH="/lib:/lib64:/usr/lib:/usr/lib64:$LD_LIBRARY_PATH:/usr/local/lib:.idris2/lib"

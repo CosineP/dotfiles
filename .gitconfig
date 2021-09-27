@@ -10,3 +10,8 @@
 	default = current
 [init]
 	defaultBranch = main
+[pager]
+	diff = delta --light
+	log = delta --light
+	reflog = delta --light
+	show = delta --light
