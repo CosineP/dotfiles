@@ -33,6 +33,9 @@ HYPHEN_INSENSITIVE="true"
 # Tab complete with ls colors
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
+# Usage order
+zstyle ':completion:*' file-sort modification
+
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
@@ -104,7 +107,7 @@ source /usr/share/doc/fzf/examples/completion.zsh
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    alias ls='ls --color=auto -t'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -125,6 +128,8 @@ setopt histignorespace
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+# ssh or foreign machines(?) have trouble with xterm-kitty for whatever reason
+alias ssh="TERM=xterm ssh"
 alias zshconfig="vi ~/.zshrc"
 alias ohmyzsh="vi ~/.oh-my-zsh"
 alias vi="nvim"
@@ -167,7 +172,7 @@ alias gat="cb ~/github-access-token"
 alias emu="emulator -avd Nexus_5X_API_27_x86 -gpu host"
 alias noblur='pkill compton; compton -i1.0 -b'
 # the nitrogen means blur can be used to undo `gray`
-alias compnorm='pkill compton; compton -b; nitrogen --restore &'
+alias compnorm='pkill picom; picom --experimental-backends -b; nitrogen --restore &'
 alias blur='compnorm'
 alias compzoom='pkill compton; compton --config ~/.config/compton-zoom.conf -b'
 alias ck='cargo check --all-targets --color=always LL'

@@ -12,11 +12,12 @@ xmodmap /home/luna/.Xmodmap
 libinput-gestures-setup start
 # this.... shouldn't be necessary?? but
 xset +fp ~/.local/share/fonts
+xset r rate 160 30
 xrdb ~/.Xresources
 
 run kak -s lapis -d
 run redshift &
-run compton -b
+run picom --experimental-backends -b
 run xcape
 run kdeconnect-indicator
 nitrogen --restore

@@ -19,6 +19,10 @@ export PATH=$PATH:/opt/hop/bin
 export PATH=$PATH:~/src/depot_tools
 export PATH=$PATH:~/.racket/7.9/bin
 export PATH=$PATH:~/.idris2/bin
+export PATH=$PATH:/home/luna/.local/share/coursier/bin
+# This needs to precede the other opts so i get firefox nightly instead of
+# regular firefox
+export PATH=$PATH:/opt/firefox-nightly
 find /opt -maxdepth 1 -type d | while read opt_dir; do
 	export PATH="$PATH:$opt_dir"
 done

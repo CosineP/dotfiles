@@ -2,13 +2,13 @@
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 #
 ## Plugins
-plug "alexherbo2/volatile-highlighter.kak"
+#plug "alexherbo2/volatile-highlighter.kak"
 plug "andreyorst/smarttab.kak" defer smarttab %{
     set-option global softtabstop 4
 } config %{
     hook global WinSetOption filetype=(rust|kak|typescript|tsx) expandtab
     hook global WinSetOption filetype=(sfg) smarttab
-    hook global WinSetOption filetype=(c) softtabstop 2
+    #hook global WinSetOption filetype=(c) softtabstop 2
 }
 plug "https://framagit.org/koyasik/kakoune-gdscript"
 plug "chambln/kakoune-readline"
@@ -16,14 +16,18 @@ plug "ul/kak-lsp" do %{
     cargo install --locked --force --path .
 }
 plug "https://gitlab.com/Screwtapello/kakoune-cargo"
-plug "listentolist/kakoune-rainbow" domain "gitlab.com" config %{
-    require-module rainbow
-    # suggested mapping
-    # map global user r ": rainbow<ret>" -docstring "rainbow brackets"
-    # map global user R ": rmhl window/ranges_rainbow_specs<ret>" \
-    #     -docstring "remove rainbow highlighter"
-}
+#plug "listentolist/kakoune-rainbow" domain "gitlab.com" config %{
+#    require-module rainbow
+#    # suggested mapping
+#    # map global user r ": rainbow<ret>" -docstring "rainbow brackets"
+#    # map global user R ": rmhl window/ranges_rainbow_specs<ret>" \
+#    #     -docstring "remove rainbow highlighter"
+#}
 plug "stoand/kakoune-idris"
+
+# This is slow, but, otherwise kak-lsp logs basically nothing.   A compromise
+# may be possible.   As soon as LSP is funky, turn this on
+set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 
 colorscheme pinkie
 
@@ -51,16 +55,22 @@ alias global bd delete-buffer
 add-highlighter global/ number-lines -relative -hlcursor
 
 map global normal \' ':lsp-hover<ret>'
+map global normal <F2> ':lsp-rename-prompt<ret>'
+map global normal <a-'> ':lsp-code-actions<ret>'
 
 # Things that need to be on window create go here
 hook global WinCreate .* %{
-    volatile-highlighter-enable
+    #volatile-highlighter-enable
 }
 
 # maybe |python|go|javascript
-hook global WinSetOption filetype=(rust|tsx|typescript|java|cpp|c) %{
+hook global WinSetOption filetype=(rust|tsx|typescript|java|cpp|c|ocaml) %{
     lsp-enable-window
-    lsp-signature-help-enable
+    lsp-auto-signature-help-enable
+}
+
+hook global BufCreate .*[.](notwasm) %{
+    set-option buffer filetype typescript
 }
 
 # preserve indentation
@@ -105,6 +115,11 @@ hook global WinSetOption filetype=rust %{
     hook global WinSetOption filetype=(?!rust).* %{
         remove-hooks window rust-auto-format
     }
+}
+
+hook global WinSetOption filetype=fsharp %{
+    lsp-enable-window
+    lsp-auto-signature-help-enable
 }
 
 hook global WinSetOption filetype=(tsx|typescript) %{
