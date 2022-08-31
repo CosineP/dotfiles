@@ -153,7 +153,7 @@ alias doot="echo thanks mr skeltal"
 alias aoeu="echo what is the problem you are trying to solve"
 alias aoeuhtns=aoeu
 # For my dotfiles git
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # I don't want to have to sudo for all the power instructions!
 alias poweroff /sbin/poweroff
 alias reboot /sbin/reboot

@@ -1,9 +1,9 @@
 [submodule ".config/awesome/lain"]
 	path = .config/awesome/lain
-	url = git://github.com/copycat-killer/lain.git
+	url = https://github.com/copycat-killer/lain
 [submodule ".config/awesome/freedesktop"]
 	path = .config/awesome/freedesktop
-	url = git://github.com/copycat-killer/awesome-freedesktop.git
+	url = https://github.com/copycat-killer/awesome-freedesktop
 [submodule "/home/luna/.nightshell"]
 	path = /home/luna/.nightshell
 	url = https://github.com/nightsense/nightshell

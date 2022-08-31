@@ -15,3 +15,5 @@
 	log = delta --light
 	reflog = delta --light
 	show = delta --light
+[url "https://github.com/"]
+	insteadOf = git://github.com/

@@ -22,12 +22,12 @@ local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
                       require("awful.hotkeys_popup.keys")
 local my_table      = --[[awful.util.table or  --]]gears.table -- 4.{0,1} compatibility
-local volume_control= require("volume-control")
+-- local volume_control= require("volume-control")
 -- https://github.com/guotsuan/awesome-revelation
-local revelation    = require("revelation")
+-- local revelation    = require("revelation")
 -- }}}
 
-volumecfg = volume_control({})
+-- volumecfg = volume_control({})
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -216,7 +216,7 @@ lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
-revelation.init()
+-- revelation.init()
 -- }}}
 
 -- {{{ Menu
@@ -286,12 +286,12 @@ globalkeys = my_table.join(
     -- awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
     --           {description = "view  previous nonempty", group = "tag"}),
 
-    awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
-    awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
-    awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
+    --awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
+    --awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
+    --awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
     awful.key({}, "Print",                function () awful.spawn.with_shell("scrot -s") end),
     
-    awful.key({ modkey, }, "Tab",         revelation),
+    -- awful.key({ modkey, }, "Tab",         revelation),
     
 
     -- Default client focus
