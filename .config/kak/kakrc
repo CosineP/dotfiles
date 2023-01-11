@@ -24,6 +24,7 @@ plug "https://gitlab.com/Screwtapello/kakoune-cargo"
 #    #     -docstring "remove rainbow highlighter"
 #}
 plug "stoand/kakoune-idris"
+plug "prolog-hl"
 
 # This is slow, but, otherwise kak-lsp logs basically nothing.   A compromise
 # may be possible.   As soon as LSP is funky, turn this on
@@ -51,6 +52,12 @@ map global normal <c-y> 'vk'
 alias global x write-quit
 alias global bd delete-buffer
 
+# kakoune seems only to provide <tab> as a shortcut here because <c-i> maps to
+# <tab> in most legacy terminals.   But since then, kakoune and kitty have both
+# supported a new protocal in which they're differentiated.    So, to simulate
+# tho old behavior we have to remap the nonsense
+map global normal <c-i> <tab>
+
 # Line numbers
 add-highlighter global/ number-lines -relative -hlcursor
 
@@ -64,7 +71,7 @@ hook global WinCreate .* %{
 }
 
 # maybe |python|go|javascript
-hook global WinSetOption filetype=(rust|tsx|typescript|java|cpp|c|ocaml) %{
+hook global WinSetOption filetype=(tsx|typescript|java|cpp|c|ocaml) %{
     lsp-enable-window
     lsp-auto-signature-help-enable
 }
@@ -138,9 +145,4 @@ hook global WinSetOption filetype=(tsx|typescript) %{
         remove-hooks window ts-auto-format
     }
 }
-
-# this is to train me to use keys i need to use
-declare-option str training 'DONT FORGET TO USE f '
-set global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} %opt{training}{{context_info}} {{mode_info}} - %val{client}@[%val{session}]'
-map global normal f ':set-option global training ""<ret>f'
 

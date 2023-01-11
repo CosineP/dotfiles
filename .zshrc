@@ -134,16 +134,17 @@ alias ssh="TERM=xterm ssh"
 alias zshconfig="vi ~/.zshrc"
 alias ohmyzsh="vi ~/.oh-my-zsh"
 alias vi="nvim"
-function k() {
-    # each directory will have its own session now
-    name=`echo "$PWD" | tr -d / | tail -c 8`
-    if ! pgrep -f "kak -s $name" > /dev/null; then
-        echo "$name" > /tmp/last-kak
-        # you might be inclined to use kak's -d alone, but it hangs terminals!!
-        daemon -D "$PWD" -- kak -s "$name" -d
-    fi
-    kak -c "$name" "$@"
-}
+#function k() {
+#    # each directory will have its own session now
+#    name=`echo "$PWD" | tr -d / | tail -c 8`
+#    if ! pgrep -f "kak -s $name" > /dev/null; then
+#        echo "$name" > /tmp/last-kak
+#        # you might be inclined to use kak's -d alone, but it hangs terminals!!
+#        daemon -D "$PWD" -- kak -s "$name" -d
+#    fi
+#    kak -c "$name" "$@"
+#}
+alias k=kak
 # connect to the last opened session
 function kk() {
     name=`cat /tmp/last-kak`
@@ -179,14 +180,15 @@ alias compzoom='pkill compton; compton --config ~/.config/compton-zoom.conf -b'
 alias ck='cargo check --all-targets --color=always LL'
 alias kmm='k /tmp/hmm'
 alias eljs='node ~/src/ElementaryJS/eval/eval.js'
-alias tryrs='kk /tmp/test.rs; rustc /tmp/test.rs -o /tmp/test-rust && /tmp/test-rust'
-alias tryc='kk /tmp/test.c; gcc /tmp/test.c -o /tmp/test-c && /tmp/test-c'
+alias tryrs='k /tmp/test.rs; rustc /tmp/test.rs -o /tmp/test-rust && /tmp/test-rust'
+alias tryc='k /tmp/test.c; gcc /tmp/test.c -o /tmp/test-c && /tmp/test-c'
 alias clear='clear && fortune'
 # warp here
 alias wh='echo "$PWD" > /tmp/zsh-warp'
 # warp now
 alias wn='cd `cat /tmp/zsh-warp`'
 alias gray='~/Documents/gray.sh'
+alias cfg='sudoedit /etc/nixos/configuration.nix; echo sudo nixos-rebuild switch'
 # Function aliases
 function bwvid() { curl https://billwurtz.com/videos.html | grep '<A' | shuf | grep -oP 'HREF="\K([^"]*)(?=")' | xargs -d'\n' printf 'https://billwurtz.com/%b\n' | xargs -d'\n' vlc }
 function teljs() {
@@ -231,8 +233,6 @@ function tv
 }
 function setup-watch
 {
-    # Disable my pretties that fuck with gaming
-    pkill redshift
     # Make sure the TV is working
     xrandr --output eDP-1 --mode 1920x1080 --output HDMI-1 --mode 1920x1080 --same-as eDP-1
     # Compton fanciness is in the way. But we still need compton for vsync
