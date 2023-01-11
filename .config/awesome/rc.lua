@@ -369,8 +369,8 @@ globalkeys = my_table.join(
 
     -- Power
     awful.key({ modkey, altkey }, "w", function () awful.spawn("oc") end),
-    awful.key({ modkey, altkey }, "s", function () awful.spawn.with_shell("/sbin/poweroff") end),
-    awful.key({ modkey, altkey }, "r", function () awful.spawn.with_shell("/sbin/reboot") end),
+    awful.key({ modkey, altkey }, "s", function () awful.spawn.with_shell("poweroff") end),
+    awful.key({ modkey, altkey }, "r", function () awful.spawn.with_shell("reboot") end),
 
     -- On the fly useless gaps change
     awful.key({ altkey, "Control" }, "=", function () lain.util.useless_gaps_resize(1) end),

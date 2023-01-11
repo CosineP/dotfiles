@@ -23,9 +23,9 @@ export PATH=$PATH:/home/luna/.local/share/coursier/bin
 # This needs to precede the other opts so i get firefox nightly instead of
 # regular firefox
 export PATH=$PATH:/opt/firefox-nightly
-find /opt -maxdepth 1 -type d | while read opt_dir; do
-	export PATH="$PATH:$opt_dir"
-done
+#find /opt -maxdepth 1 -type d | while read opt_dir; do
+	#export PATH="$PATH:$opt_dir"
+#done
 
 export ANDROID_HOME=~/.android/Sdk
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle
@@ -36,8 +36,6 @@ export LV2_PATH="$HOME/.lv2:/usr/local/lib/lv2:/usr/lib/lv2"
 export LXVST_PATH="$HOME/.vst:/usr/lib/vst"
 export TEXMFHOME="~/.texmf"
 export IDRIS2_CG=racket
-
-source ~/.cargo/env
 
 export vblank_mode=2
 

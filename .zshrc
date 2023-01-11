@@ -65,7 +65,8 @@ HIST_STAMPS="yyyy-mm-dd"
 # plugins=(git zsh-autosuggestions)
 
 # Antigen
-source /usr/share/zsh-antigen/antigen.zsh
+# ????????????
+source /nix/store/1yxccmh9wr803957kk0sf0yyw6hbwnjq-antigen-2.2.3/share/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
@@ -84,10 +85,10 @@ autoload zmv
 
 # User configuration
 
-eval $(thefuck --alias)
-
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
