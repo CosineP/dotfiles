@@ -259,7 +259,7 @@ local brighticon = wibox.widget.imagebox(theme.widget_brightness)
 local backlight = awful.widget.watch("brightnessctl g", 10,
     function(widget, stdout)
         local scalar = tonumber(stdout:match("(%d+)"))
-        local perc = 100 * scalar / 7500 -- from `brightnessctl m`, i just pasted because i'm dumb
+        local perc = 100 * scalar / 96000 -- from `brightnessctl m`, i just pasted because i'm dumb
         widget:set_text(string.format(" %.0f%%", perc))
     end
 )
