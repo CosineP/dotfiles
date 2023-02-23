@@ -66,7 +66,8 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Antigen
 # ????????????
-source /nix/store/1yxccmh9wr803957kk0sf0yyw6hbwnjq-antigen-2.2.3/share/antigen/antigen.zsh
+# also i had to do nix-shell -p antigen even though it's in my cfg????
+source /nix/store/a1avhjrp00vqz2n9kshagzz8k0905n2z-antigen-2.2.3/share/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
@@ -82,6 +83,12 @@ antigen theme avit
 antigen apply
 
 autoload zmv
+
+# my zsh theme is getting messed up somehow. i think the typeset is getting
+# unset. so putting these here sets them again so they work
+typeset +H _current_dir="%{$fg_bold[blue]%}%3~%{$reset_color%} "
+typeset +H _return_status="%{$fg_bold[red]%}%(?..⍉)%{$reset_color%}"
+typeset +H _hist_no="%{$fg[grey]%}%h%{$reset_color%}"
 
 # User configuration
 
