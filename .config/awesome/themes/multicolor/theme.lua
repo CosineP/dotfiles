@@ -113,7 +113,7 @@ mytextclock.font = theme.font
 -- Weather
 local weathericon = wibox.widget.imagebox(theme.widget_weather)
 theme.weather = lain.widget.weather({
-    city_id = 4968729, -- Kennebunk, ME
+    city_id = 4930956, -- Boston, MA
     notification_preset = { font = "DejaVu Sans Mono 10", fg = theme.fg_normal },
     weather_na_markup = markup.fontfg(theme.font, "#eca4c4", "N/A "),
     units = "imperial",
@@ -197,7 +197,7 @@ theme.volume = lain.widget.alsa({
             volume_now.level = volume_now.level .. "M"
         end
 
-        widget:set_markup(markup.fontfg(theme.font, "#7493d2", volume_now.level .. "% "))
+        --widget:set_markup(markup.fontfg(theme.font, "#7493d2", volume_now.level .. "% "))
     end
 })
 
