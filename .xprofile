@@ -14,7 +14,7 @@ xset +fp ~/.local/share/fonts
 xset r rate 175 40
 xrdb ~/.Xresources
 
-run picom --experimental-backends -b
+run picom -b
 run xcape
 run kdeconnect-indicator
 run libinput-gestures &

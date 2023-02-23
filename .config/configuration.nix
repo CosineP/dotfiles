@@ -119,7 +119,7 @@
 
   # For grapejuice / roblox, apparently
   # https://brinkervii.gitlab.io/grapejuice/docs/Installing-Graphics-Libraries.html
-  hardware.opengl.driSupport32Bit = true;
+  #hardware.opengl.driSupport32Bit = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
@@ -142,31 +142,32 @@
   security.sudo.wheelNeedsPassword = false;
 
   nixpkgs.config = { allowUnfree = true; };
-  # 22.11 broke my networkmanager for eduroam (1.40.2 changed something about EAP maybe?)
-  # so i tried to backport 1.38.4 to my system. but, webkitgtk depends on
-  # libproxy depends on networkmanager (why??), thus requiring me to built
-  # webkit, which is a non-starter. so, onto a different solution
-  #nixpkgs.overlays = [
-  #  (self: super: {
-  #    networkmanager = super.networkmanager.overrideAttrs (oldAttrs: {
-  #      version = "1.38.4";
-  #      src = self.fetchurl {
-  #        url = "mirror://gnome/sources/NetworkManager/1.38/NetworkManager-1.38.4.tar.xz";
-  #        sha256 = "sha256-hB9k1Bd2qt2SsVH0flD2K+igYRqQVv5r+BiBAk5qlsU=";
-  #      };
-  #      patches = [
-  #        (with self; self.substituteAll {
-  #          src = /etc/nixos/networkmanager-fix-paths.patch;
-  #          inherit iputils kmod openconnect ethtool gnused systemd;
-  #          inherit runtimeShell;
-  #        })
-  #        # there's an existing path here idk how path's work so just steal it
-  #        (builtins.elemAt oldAttrs.patches 1)
-  #      ];
-  #      nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [self.intltool];
-  #    });
-  #  })
-  #];
+  # wpa_supplicant now depends by default on openssl 3, which doesn't support
+  # eduroam (why?). Here we override it to use openssl 1.1 restoring support for
+  # eduroam
+  nixpkgs.overlays = [
+    (self: super: {
+      wpa_supplicant = super.wpa_supplicant.override ({
+        openssl = pkgs.openssl_1_1;
+      });
+      # xdotool support got broken in 4.3. but, this upgrade is more complicated
+      # than that
+      awesome = (super.awesome.overrideAttrs (oldAttrs: {
+        version = "2022-12-18";
+        src = super.fetchFromGitHub {
+          owner = "awesomewm";
+          repo = "awesome";
+          rev = "ee0663459922a41f57fa2cc936da80d5857eedc9";
+          sha256 = "sha256-K9qOOdzo/KEcEb6DJ1Q1W6sqarbDAQ3cm7Oa6pbikHI=";
+        };
+        patches = []; # merged!
+        postPatch = ''
+          patchShebangs tests/examples/_postprocess.lua
+        '';
+        buildInputs = oldAttrs.buildInputs;
+      }));
+    })
+  ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -176,19 +177,7 @@
     })
     dmenu
     firefox
-    # roblox + wine is called grapejuice, which is out-of-date
-    (grapejuice.overrideAttrs (oldAttrs: {
-      version = "7.2.1";
-      src = fetchFromGitLab {
-        owner = "BrinkerVII";
-        repo = "grapejuice";
-        rev = "v7.2.1";
-        sha256 = "sha256-bx0jqG03GSHj1lO9NRh8DJRUyJBbyVUKCy/2pZ3OWas=";
-      };
-      propagatedBuildInputs = with python3Packages; oldAttrs.propagatedBuildInputs ++ [
-        pydantic
-      ];
-    }))
+    # grapejuice # i don't know if i want this and the wine dependency
     gthumb
     killall
     kitty
@@ -252,20 +241,6 @@
     # drivers and such?
     bluez
     # x11 config and support
-    awesome
-    # xdotool support got broken in 4.3. but, this upgrade is more complicated
-    # than that
-    #(awesome.overrideAttrs (oldAttrs: {
-    #  version = "2022-12-18";
-    #  src = fetchFromGitHub {
-    #    owner = "awesomewm";
-    #    repo = "awesome";
-    #    rev = "ee0663459922a41f57fa2cc936da80d5857eedc9";
-    #    sha256 = "sha256-K9qOOdzo/KEcEb6DJ1Q1W6sqarbDAQ3cm7Oa6pbikHI=";
-    #  };
-    #  # merged!
-    #  patches = [];
-    #}))
     brightnessctl
     libsForQt5.kdeconnect-kde
     libinput-gestures
@@ -280,7 +255,6 @@
     mold
     python3
     rust-analyzer
-    wineWowPackages.stable
     # digital audio
     ardour
     chuck
@@ -352,4 +326,3 @@
   system.stateVersion = "22.05"; # Did you read the comment?
 
 }
-
