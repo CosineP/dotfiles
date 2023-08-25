@@ -1,5 +1,4 @@
 # dotfiles
-My dotfiles from my home desktop running gNewSense GNU/Linux, based on Debian.
 
 Created using the technique described here: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/ which definitely has at least one [archive](https://web.archive.org/web/20170326125752/https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/) on the Wayback Machine.
 
