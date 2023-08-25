@@ -3,7 +3,6 @@ keycode 66 = Control_L
 clear Lock
 add Control = Control_L
 keycode 255 = Escape
-keycode 9 = Caps_Lock
-add Lock = Caps_Lock
-keycode 135 = dead_greek
-
+keycode 9 = j
+! add Lock = Caps_Lock
+keycode 108 = dead_greek

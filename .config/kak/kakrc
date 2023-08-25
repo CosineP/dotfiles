@@ -24,7 +24,11 @@ plug "https://gitlab.com/Screwtapello/kakoune-cargo"
 #    #     -docstring "remove rainbow highlighter"
 #}
 plug "stoand/kakoune-idris"
-plug "prolog-hl"
+plug "more-filetypes"
+# prolog and perl need to duke it out already
+hook global BufCreate .*\.(pl)? %{
+    set-option buffer filetype perl
+}
 
 # This is slow, but, otherwise kak-lsp logs basically nothing.   A compromise
 # may be possible.   As soon as LSP is funky, turn this on

@@ -16,6 +16,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 1;
 
+  boot.kernel.sysctl = {
+    "vm.dirty_background_ratio" = 10;
+    "vm.dirty_ratio" = 20;
+  };
+
+  nix.settings.experimental-features = [ "nix-command" ];
+
   systemd.sleep.extraConfig = ''
     HandleLidSwitch=suspend-then-hibernate
     HibernateDelaySec=35m
@@ -36,7 +43,7 @@
   networking.resolvconf.dnsSingleRequest = true;
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Los_Angeles";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -51,9 +58,7 @@
   };
 
   location = {
-    provider = "manual";
-    latitude = 42.32;
-    longitude = -71.09;
+    provider = "geoclue2";
   };
 
   # Enable the X11 windowing system.
@@ -87,18 +92,21 @@
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.hplip ];
 
+  # Improve I/O performance on my SSD?  i checked lsblk --discard to ensure
+  # DISC-GRAN and DISC-MAX were non-zero.  This is important to avoid data loss.
+  services.fstrim.enable = true;
+
   services.blueman.enable = true;
+
+  # Following 1 to 2 lines may not be necessary.  Added them hoping to fix a
+  # problem with redshift that was ultimately fixed with a system restart
+  services.avahi.enable = true;
+  services.geoclue2.enable = true;
 
   services.redshift = {
     enable = true;
     temperature.night = 2200;
   };
-
-  services.udev.extraRules =
-    ''SUBSYSTEM=="power_supply", '' +
-    ''ATTR{status}=="Discharging", '' +
-    ''ATTR{capacity}=="[0-5]", '' +
-    ''RUN+="${pkgs.systemd}/bin/systemctl hibernate"'';
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -117,18 +125,15 @@
       };
   };
 
-  # For grapejuice / roblox, apparently
-  # https://brinkervii.gitlab.io/grapejuice/docs/Installing-Graphics-Libraries.html
-  #hardware.opengl.driSupport32Bit = true;
-
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
   programs.zsh.enable = true;
+  programs.kdeconnect.enable = true;
 
   # digital audio
-  musnix.enable = true;
-  security.rtkit.enable = true;
+  #musnix.enable = true;
+  #security.rtkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luna = {
@@ -141,15 +146,23 @@
   };
   security.sudo.wheelNeedsPassword = false;
 
-  nixpkgs.config = { allowUnfree = true; };
+  nixpkgs.config = {
+    allowUnfree = true;
+    # i don't like this, but i want to play video game
+    # it'd be great if i could allow only for itch
+    # and i should probably set up firejail for itch because this is EOL
+    permittedInsecurePackages = [ "electron-11.5.0" ];
+  };
   # wpa_supplicant now depends by default on openssl 3, which doesn't support
   # eduroam (why?). Here we override it to use openssl 1.1 restoring support for
   # eduroam
   nixpkgs.overlays = [
     (self: super: {
-      wpa_supplicant = super.wpa_supplicant.override ({
-        openssl = pkgs.openssl_1_1;
-      });
+      # This may need to be fixed when i get back to northeastern, but
+      # commenting for upgrade while in SF
+      #wpa_supplicant = super.wpa_supplicant.override ({
+      #  openssl = pkgs.openssl_1_1;
+      #});
       # xdotool support got broken in 4.3. but, this upgrade is more complicated
       # than that
       awesome = (super.awesome.overrideAttrs (oldAttrs: {
@@ -171,53 +184,57 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # likely to run from dmenu / .desktop
+    # chat / communication
     (discord.override {
         nss = pkgs.nss_latest;
     })
+    signal-desktop
+    wire-desktop
+    zoom-us
+    # video (games)
+    itch
+    qbittorrent
+    syncplay
+    vlc
+    # likely to run from dmenu / .desktop
     dmenu
     firefox
-    # grapejuice # i don't know if i want this and the wine dependency
     gthumb
-    killall
     kitty
     krita
     libreoffice-fresh
+    lyx
     okular
     pavucontrol
-    qbittorrent
     scrot
-    signal-desktop
-    vlc
-    (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions; [
-        github.copilot
-        rust-analyzer
-        vscodevim.vim
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "flowistry";
-          publisher = "wcrichton";
-          version = "0.5.34";
-          sha256 = "sha256-6jYjum+AkLxbtsDmZipshFZSk/IuE4nnDMDOrRq6JMU=";
-          # homeless shelter prevents me from putting this in a hook, maybe
-          # so i ran it myself *before* switching and running vscode
-          #  rustup toolchain install nightly-2022-11-07 --profile minimal -c rust-src -c rustc-dev -c llvm-tools-preview
-          #  cargo +nightly-2022-11-07 install flowistry_ide --version 0.5.34 --force
-        }
-      ];
-    })
-    zoom-us
+    #(vscode-with-extensions.override { # need to figure out how to restore after 23-05
+    #  vscodeExtensions = with vscode-extensions; [
+    #    github.copilot
+    #    rust-analyzer
+    #    vscodevim.vim
+    #  ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    #    {
+    #      name = "flowistry";
+    #      publisher = "wcrichton";
+    #      version = "0.5.34";
+    #      vscodeExtUniqueId = "wcrichton.flowistry";
+    #      sha256 = "sha256-6jYjum+AkLxbtsDmZipshFZSk/IuE4nnDMDOrRq6JMU=";
+    #      # homeless shelter prevents me from putting this in a hook, maybe
+    #      # so i ran it myself *before* switching and running vscode
+    #      #  rustup toolchain install nightly-2022-11-07 --profile minimal -c rust-src -c rustc-dev -c llvm-tools-preview
+    #      #  cargo +nightly-2022-11-07 install flowistry_ide --version 0.5.34 --force
+    #    }
+    #  ];
+    #})
     zotero
     # likely to run from terminal
-    antigen
     delta
     dtrx
     fzf
     gdb
     git
-    imagemagick
     kakoune
+    killall
     mullvad-vpn
     ncdu
     parted
@@ -234,15 +251,18 @@
     nodejs
     ocaml
     ocamlPackages.ocamlbuild
+    python3
     racket
     rustup
-    texlive.combined.scheme-small
+    rust-analyzer
+    (texlive.combine { inherit (texlive) scheme-small bbding; })
     zsh
     # drivers and such?
     bluez
     # x11 config and support
+    antigen
+    autokey
     brightnessctl
-    libsForQt5.kdeconnect-kde
     libinput-gestures
     nitrogen
     nm-tray
@@ -252,17 +272,21 @@
     xdotool
     xorg.xmodmap
     # non-x11 config and support
+    hunspell # support lyx
+    hunspellDicts.en_US # hunspell dict
     mold
-    python3
-    rust-analyzer
     # digital audio
     ardour
     chuck
+    (import ./drmr.nix {})
     drumgizmo
     hydrogen
+    # jack2 # nothing but trouble
+    # qjackctl
     puredata
     qsynth
     soundfont-fluid
+    x42-avldrums
   ];
 
   security.wrappers = {
@@ -292,7 +316,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.passwordAuthentication = false;
+  services.openssh.settings.PasswordAuthentication = false;
   services.mullvad-vpn.enable = true;
   services.tlp.enable = true;
 
