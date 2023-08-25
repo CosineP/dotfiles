@@ -67,7 +67,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Antigen
 # ????????????
 # also i had to do nix-shell -p antigen even though it's in my cfg????
-source /nix/store/a1avhjrp00vqz2n9kshagzz8k0905n2z-antigen-2.2.3/share/antigen/antigen.zsh
+source `nix eval --raw --impure --expr '(import <nixpkgs> {}).antigen.outPath'`/share/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
