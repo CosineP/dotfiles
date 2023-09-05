@@ -21,7 +21,7 @@
     "vm.dirty_ratio" = 20;
   };
 
-  nix.settings.experimental-features = [ "nix-command" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   systemd.sleep.extraConfig = ''
     HandleLidSwitch=suspend-then-hibernate
@@ -153,18 +153,15 @@
     # and i should probably set up firejail for itch because this is EOL
     permittedInsecurePackages = [ "electron-11.5.0" ];
   };
-  # wpa_supplicant now depends by default on openssl 3, which doesn't support
-  # eduroam (why?). Here we override it to use openssl 1.1 restoring support for
-  # eduroam
   nixpkgs.overlays = [
     (self: super: {
-      # This may need to be fixed when i get back to northeastern, but
-      # commenting for upgrade while in SF
-      #wpa_supplicant = super.wpa_supplicant.override ({
-      #  openssl = pkgs.openssl_1_1;
-      #});
-      # xdotool support got broken in 4.3. but, this upgrade is more complicated
-      # than that
+      # https://kisonecat.com/blog/eduroam-openssl-wpa-supplicant/
+      # Fixed patch to use tabs and correct filenames
+      wpa_supplicant = super.wpa_supplicant.overrideAttrs (attrs: {
+        patches = attrs.patches ++ [ ./eduroam.patch ];
+      });
+      # xdotool support and more got broken in 4.3. Staying on 4.2 at least
+      # until 4.4 comes out
       awesome = (super.awesome.overrideAttrs (oldAttrs: {
         version = "2022-12-18";
         src = super.fetchFromGitHub {
@@ -207,25 +204,7 @@
     okular
     pavucontrol
     scrot
-    #(vscode-with-extensions.override { # need to figure out how to restore after 23-05
-    #  vscodeExtensions = with vscode-extensions; [
-    #    github.copilot
-    #    rust-analyzer
-    #    vscodevim.vim
-    #  ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-    #    {
-    #      name = "flowistry";
-    #      publisher = "wcrichton";
-    #      version = "0.5.34";
-    #      vscodeExtUniqueId = "wcrichton.flowistry";
-    #      sha256 = "sha256-6jYjum+AkLxbtsDmZipshFZSk/IuE4nnDMDOrRq6JMU=";
-    #      # homeless shelter prevents me from putting this in a hook, maybe
-    #      # so i ran it myself *before* switching and running vscode
-    #      #  rustup toolchain install nightly-2022-11-07 --profile minimal -c rust-src -c rustc-dev -c llvm-tools-preview
-    #      #  cargo +nightly-2022-11-07 install flowistry_ide --version 0.5.34 --force
-    #    }
-    #  ];
-    #})
+    (import ./vscode.nix { inherit pkgs; })
     zotero
     # likely to run from terminal
     delta
