@@ -3,6 +3,8 @@ export PATH=$PATH:~/.cabal/bin
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/src/depot_tools
+# Nonsense i'm currently dealing with
+export PATH=$PATH:~/src/wasmtime/target/release:~/src/binaryen/bin:~/src/effect-handlers-wasm/interpreter
 export MOZ_USE_XINPUT2=1
 export GOPATH=~/.go
 

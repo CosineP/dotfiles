@@ -25,7 +25,6 @@
 
   systemd.sleep.extraConfig = ''
     HandleLidSwitch=suspend-then-hibernate
-    HibernateDelaySec=35m
   '';
 
   networking.hostName = "glitter"; # Define your hostname.
@@ -43,7 +42,7 @@
   networking.resolvconf.dnsSingleRequest = true;
 
   # Set your time zone.
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/New_York";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -132,8 +131,8 @@
   programs.kdeconnect.enable = true;
 
   # digital audio
-  #musnix.enable = true;
-  #security.rtkit.enable = true;
+  musnix.enable = true;
+  security.rtkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luna = {
@@ -148,10 +147,8 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    # i don't like this, but i want to play video game
-    # it'd be great if i could allow only for itch
-    # and i should probably set up firejail for itch because this is EOL
-    permittedInsecurePackages = [ "electron-11.5.0" ];
+    # i don't like this, but i'm waiting for fix i guess
+    permittedInsecurePackages = [ "zotero-6.0.26" ];
   };
   nixpkgs.overlays = [
     (self: super: {
@@ -189,7 +186,7 @@
     wire-desktop
     zoom-us
     # video (games)
-    itch
+    #itch
     qbittorrent
     syncplay
     vlc
@@ -227,6 +224,8 @@
     # everything is a programming language,
     # but these are *really* programming languges
     clang
+    elmPackages.elm
+    ghc
     nodejs
     ocaml
     ocamlPackages.ocamlbuild
@@ -254,6 +253,7 @@
     hunspell # support lyx
     hunspellDicts.en_US # hunspell dict
     mold
+    monaspace
     # digital audio
     ardour
     chuck

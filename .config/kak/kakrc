@@ -34,7 +34,7 @@ hook global BufCreate .*\.(pl)? %{
 # may be possible.   As soon as LSP is funky, turn this on
 set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 
-colorscheme pinkie
+colorscheme edgie
 
 set global tabstop 4
 map global insert <tab> '<a-;><gt>'
