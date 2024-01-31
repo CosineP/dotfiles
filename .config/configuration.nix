@@ -81,7 +81,10 @@
   #services.getty.autologinUser = "luna";
 
   # Configure keymap in X11
-  services.xserver.layout = "dvorak";
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "dvorak";
+  };
   # services.xserver.xkbOptions = {
   #   "eurosign:e";
   #   "caps:escape" # map caps to escape.
@@ -205,6 +208,7 @@
     zotero
     # likely to run from terminal
     delta
+    difftastic
     dtrx
     fzf
     gdb
@@ -231,6 +235,7 @@
     ocamlPackages.ocamlbuild
     python3
     racket
+    typescript
     rustup
     rust-analyzer
     (texlive.combine { inherit (texlive) scheme-small bbding; })
@@ -253,10 +258,9 @@
     hunspell # support lyx
     hunspellDicts.en_US # hunspell dict
     mold
-    monaspace
+    #monaspace
     # digital audio
     ardour
-    chuck
     (import ./drmr.nix {})
     drumgizmo
     hydrogen
@@ -314,6 +318,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+  # https://discourse.nixos.org/t/connected-to-mullvadvpn-but-no-internet-connection/35803/8
+  services.resolved.enable = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

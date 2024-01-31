@@ -1,6 +1,8 @@
 [user]
 	name = cosine
 	email = trash@cosine.online
+	name = Luna Phipps-Costin
+	email = phipps-costin.l@northeastern.edu
 [credential]
 	helper = cache
 [alias]
@@ -10,10 +12,18 @@
 	default = current
 [init]
 	defaultBranch = main
+[diff]
+	tool = difftastic
+  external = difft
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
 [pager]
-	diff = delta --light
-	log = delta --light
-	reflog = delta --light
-	show = delta --light
+	difftool = true
+#	diff = delta --light
+#	log = delta --light
+#	reflog = delta --light
+#	show = delta --light
 [url "https://github.com/"]
 	insteadOf = git://github.com/

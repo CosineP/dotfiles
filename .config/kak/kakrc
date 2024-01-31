@@ -4,7 +4,7 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 ## Plugins
 #plug "alexherbo2/volatile-highlighter.kak"
 plug "andreyorst/smarttab.kak" defer smarttab %{
-    set-option global softtabstop 4
+    set-option global softtabstop 2
 } config %{
     hook global WinSetOption filetype=(rust|kak|typescript|tsx) expandtab
     hook global WinSetOption filetype=(sfg) smarttab
@@ -34,9 +34,9 @@ hook global BufCreate .*\.(pl)? %{
 # may be possible.   As soon as LSP is funky, turn this on
 set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 
-colorscheme edgie
+colorscheme pinkie
 
-set global tabstop 4
+set global tabstop 2
 map global insert <tab> '<a-;><gt>'
 map global insert <s-tab> '<a-;><lt>'
 set global scrolloff 5,5

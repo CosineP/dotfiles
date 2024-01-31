@@ -55,6 +55,9 @@ COMPLETION_WAITING_DOTS="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
 
+HISTSIZE=999999999
+SAVEHIST=999999999
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -196,8 +199,13 @@ alias wh='echo "$PWD" > /tmp/zsh-warp'
 alias wn='cd `cat /tmp/zsh-warp`'
 alias gray='~/Documents/gray.sh'
 alias cfg='sudoedit /etc/nixos/configuration.nix; echo sudo nixos-rebuild switch'
+alias slow='PROMPT='"'"'${_current_dir}%{%(!.${fg[red]}.${fg[white]})%}▶%{$reset_color%} '"'"
 # Function aliases
 function bwvid() { curl https://billwurtz.com/videos.html | grep '<A' | shuf | grep -oP 'HREF="\K([^"]*)(?=")' | xargs -d'\n' printf 'https://billwurtz.com/%b\n' | xargs -d'\n' vlc }
+function tooslow() {
+    export PROMPT='${_current_dir}%{%(!.${fg[red]}.${fg[white]})%}▶%{$reset_color%} '
+    export RPROMPT='${_return_status}'
+}
 function teljs() {
     eljs "$@" 1
 }
