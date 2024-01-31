@@ -1,0 +1,12 @@
+diff --git a/drmr_hydrogen.c b/drmr_hydrogen_patch.c
+index bca3720..e1295b7 100644
+--- a/drmr_hydrogen.c
++++ b/drmr_hydrogen.c
+@@ -40,6 +40,7 @@
+  * will be expanded, ones in the middle will be left in place.
+  */
+ static char* default_drumkit_locations[] = {
++  "/run/current-system/sw/share/hydrogen/data/drumkits/",
+   "/usr/share/hydrogen/data/drumkits/",
+   "/usr/local/share/hydrogen/data/drumkits/",
+   "/usr/share/drmr/drumkits/",
