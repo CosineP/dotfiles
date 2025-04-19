@@ -614,6 +614,31 @@ awful.rules.rules = {
     { rule_any = { type = { "dialog", "normal" } },
       properties = { titlebars_enabled = false } },
 
+    { -- General plasma rules
+      rule_any = {
+          class = {
+              "plasmashell",
+              "ksmserver-logout-greeter",
+          },
+      },
+      properties = {
+          floating = true,
+          border_width = 0,
+          titlebars = false, -- custom property to control titlebars
+      },
+
+    },
+    { -- KDE apps
+        rule_any = {
+            class = {
+                "spectacle",
+                "krunner"
+            }
+        },
+        properties = {
+            floating = true,
+        }
+    },
     -- Set Firefox to always map on the first tag on screen 1.
     --{ rule = { class = "Firefox" },
     --  properties = { screen = 1, tag = screen[1].tags[1] } },
@@ -636,6 +661,32 @@ client.connect_signal("manage", function (c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
+
+    if c.type == "dock" -- Plasma Panel
+        or c.type == "desktop" then -- Plasma Desktop
+        c.focusable = false
+        c:tags(c.screen.tags) -- show on all tags from this screen.
+    end
+    
+    -- Show titlebars only if enabled.
+    if c.titlebars then 
+        awful.titlebar.show(c)
+    else
+        awful.titlebar.hide(c)
+    end
+    
+    -- Place floating windows. Plasma widgets provide this info
+     if c.floating then
+        if c.size_hints.user_position then
+            c.x = c.size_hints.user_position.x
+            c.y = c.size_hints.user_position.y
+        end
+        if c.size_hints.user_size then
+            c.width = c.size_hints.user_size.width
+            c.height = c.size_hints.user_size.height
+        end
+    end
+
 end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.

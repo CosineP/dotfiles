@@ -12,18 +12,18 @@
 	default = current
 [init]
 	defaultBranch = main
-[diff]
-	tool = difftastic
-  external = difft
-[difftool]
-	prompt = false
+#[diff]
+#	tool = difftastic
+#  external = difft
+#[difftool]
+#	prompt = false
 [difftool "difftastic"]
 	cmd = difft "$LOCAL" "$REMOTE"
 [pager]
-	difftool = true
-#	diff = delta --light
-#	log = delta --light
-#	reflog = delta --light
-#	show = delta --light
+#	difftool = true
+	diff = delta --light
+	log = delta --light
+	reflog = delta --light
+	show = delta --light
 [url "https://github.com/"]
 	insteadOf = git://github.com/

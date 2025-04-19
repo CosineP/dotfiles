@@ -7,10 +7,8 @@ run () {
   fi
 }
 
-./.wacom.sh
 xmodmap /home/luna/.Xmodmap
 # this.... shouldn't be necessary?? but
-xset +fp ~/.local/share/fonts
 xset r rate 175 40
 xrdb ~/.Xresources
 
